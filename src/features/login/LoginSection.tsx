@@ -20,12 +20,12 @@ export default function LoginSection() {
   }>({
     username: {
       label: "Tên đăng nhập",
-      value: "dinhtruongson",
+      value: "",
       type: "text",
     },
     password: {
       label: "Mật khẩu",
-      value: "Dinhtruongson@123",
+      value: "",
       type: "password",
     },
   });
