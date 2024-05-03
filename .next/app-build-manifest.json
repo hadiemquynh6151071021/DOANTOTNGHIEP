@@ -26,15 +26,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(features)/layout.js"
     ],
-    "/(features)/plans/page": [
+    "/(features)/construction-diaries/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(features)/plans/page.js"
+      "static/chunks/app/(features)/construction-diaries/page.js"
     ],
-    "/(features)/plans/layout": [
+    "/(features)/construction-diaries/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(features)/plans/layout.js"
+      "static/chunks/app/(features)/construction-diaries/layout.js"
     ]
   }
 }

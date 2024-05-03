@@ -5,11 +5,12 @@ import { useEffect, useState } from "react";
 import { IConstructionData, headCells } from "./constants";
 import useLoadingAnimation from "@/hooks/useLoadingAnimation";
 import useAlert from "@/hooks/useAlert";
-import { ConstructionListType } from "@/apis/constructionSite";
+import constructionSiteAPI, { ConstructionListType } from "@/apis/constructionSite";
 import CSTableToolbar from "./CSTableToolbar";
 import TableLayout from "@/components/table/TableLayout";
 import EnhancedTableHead from "@/components/table/EnhancedTableHead";
 import TableRow from "@/components/table/TableRow";
+import { getVNLocaleDateString } from "@/utils/functions/getLocaleDateString";
 
 interface IConstructionTableProps {
 	constructionType: ConstructionListType
@@ -50,42 +51,46 @@ export default function CSTable({
 		setPage(0);
 	};
 
-	// useEffect(() => {
-	// 	fetchRecentDiaries();
-	// }, []);
+	useEffect(() => {
+		fetchRecentConstructionSite();
+	}, []);
 
-	// async function fetchRecentDiaries() {
-	// 	setLoading(true);
-	// 	try {
-	// 		const plans = await planAPI.getList(planType);
+	async function fetchRecentConstructionSite() {
+		setLoading(true);
+		try {
+			const constructionSite = (await constructionSiteAPI.getListActive()) || [];
 			
-	// 		const convertedPlans = plans.map(plan => ({
-	// 			construction: "",
-	// 			createdDate: "",
-	// 			plan: plan.planname + " " + plan.planid,
-	// 			planId: plan.planid + "",
-	// 			startDate: getVNLocaleDateString(plan.startdate),
-	// 			endDate: getVNLocaleDateString(plan.enddate),
-	// 		}));
+			const convertedConstructionSite = constructionSite.map(constructionSite => ({
+				constructionId: constructionSite.constructionsiteid,
+				constructionIdCode: constructionSite.constructionsitecode,
+				constructionName: constructionSite.constructionsitename,
+				startDate: getVNLocaleDateString(constructionSite.startdate),
+				endDate: getVNLocaleDateString(constructionSite.enddate),
+				constructionType: constructionSite.mdConstructionType.constructiontypename
+			}));
 
-	// 		setRows(convertedPlans);
-	// 		setFilteredRows(convertedPlans);
-	// 	}
-	// 	catch (ex) {
-	// 		setAlert({
-	// 			message: "Lấy dữ liệu danh sách Kế hoạch thất bại!",
-	// 			severity: "error"
-	// 		});
-	// 	}
-	// 	finally {
-	// 		setLoading(false);
-	// 	}
-	// }
+			setRows(convertedConstructionSite);
+			setFilteredRows(convertedConstructionSite);
+		}
+		catch (ex) {
+			setAlert({
+				message: "Lấy dữ liệu danh sách Công trình thất bại!",
+				severity: "error"
+			});
+		}
+		finally {
+			setLoading(false);
+		}
+	}
+
+	const handleClick = () => {
+		alert("Click")
+	}
 
 	return (
 		<TableLayout>
 			{/* Toolbar  */}
-			<CSTableToolbar />
+			{/* <CSTableToolbar /> */}
 
 			{/* Table  */}
 			<TableContainer sx={{ maxHeight: 460 }}>
@@ -102,10 +107,11 @@ export default function CSTable({
 					{filteredRows.map(row => (
 						<TableRow
 							key={row.constructionId}
-							href={`/constructions/${row.constructionId}`}
+							href={`plans?constructionsiteid=${row.constructionId}`}
+							// http://localhost:8080/api/plans?constructionsiteid=1
 							cells={[
 								{
-									value: row.constructionId
+									value: row.constructionIdCode
 								},
 								{
 									value: row.constructionName
@@ -117,9 +123,10 @@ export default function CSTable({
 									value: row.endDate
 								},
 								{
-									value: row.createdDate
+									value: row.constructionType
 								},
 							]}
+							
 						/>
 					))}
 				</Table>

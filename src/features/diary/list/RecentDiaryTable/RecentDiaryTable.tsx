@@ -1,6 +1,6 @@
 "use client";
-import EnhancedTableHead from "@/components/Table/EnhancedTableHead";
-import TableLayout from "@/components/Table/TableLayout";
+import EnhancedTableHead from "@/components/table/EnhancedTableHead";
+import TableLayout from "@/components/table/TableLayout";
 import { Order } from "@/utils/functions/sort";
 import { Table, TableContainer, TablePagination } from "@mui/material";
 import { useEffect, useState } from "react";
@@ -8,7 +8,7 @@ import { IDiaryData, headCells } from "../constants";
 import DiaryTableToolbar from "../DiaryTableToolbar";
 import useLoadingAnimation from "@/hooks/useLoadingAnimation";
 import useAlert from "@/hooks/useAlert";
-import TableRow from "@/components/Table/TableRow";
+import TableRow from "@/components/table/TableRow";
 import diaryApi, { DiaryListType } from "@/apis/diary";
 
 export default function RecentDiaryTable() {

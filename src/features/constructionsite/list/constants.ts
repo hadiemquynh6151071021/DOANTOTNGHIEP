@@ -1,17 +1,17 @@
-import { IHeadCell } from "@/components/Table/constants";
+import { IHeadCell } from "@/components/table/constants";
 
 export interface IConstructionData {
-    constructionId: string;
+    constructionId: number;
+    constructionIdCode: string;
     constructionName: string;
-    address: string;
     startDate: string;
     endDate: string;
-    createdDate: string;
+    constructionType: string;
 }
 
 export const headCells: IHeadCell<IConstructionData>[] = [
     {
-        id: "constructionId",
+        id: "constructionIdCode",
         numeric: false,
         label: "Mã công trình",
     },
@@ -31,8 +31,8 @@ export const headCells: IHeadCell<IConstructionData>[] = [
         label: "Ngày kết thúc",
     },
     {
-        id: "createdDate",
+        id: "constructionType",
         numeric: false,
-        label: "Ngày tạo",
+        label: "Loại công trình",
     },
 ];
