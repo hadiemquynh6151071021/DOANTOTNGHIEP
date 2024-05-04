@@ -11,6 +11,41 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
+    "/(features)/plans/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(features)/plans/layout.js"
+    ],
+    "/(features)/plans/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(features)/plans/page.js"
+    ],
+    "/(features)/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(features)/layout.js"
+    ],
+    "/(features)/construction-sites/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(features)/construction-sites/layout.js"
+    ],
+    "/(features)/construction-sites/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(features)/construction-sites/page.js"
+    ],
+    "/(features)/construction-sites/planlist/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(features)/construction-sites/planlist/layout.js"
+    ],
+    "/(features)/construction-sites/planlist/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(features)/construction-sites/planlist/page.js"
+    ],
     "/(features)/home/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -21,20 +56,10 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(features)/home/layout.js"
     ],
-    "/(features)/layout": [
+    "/not-found": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(features)/layout.js"
-    ],
-    "/(features)/construction-diaries/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(features)/construction-diaries/page.js"
-    ],
-    "/(features)/construction-diaries/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(features)/construction-diaries/layout.js"
+      "static/chunks/app/not-found.js"
     ]
   }
 }

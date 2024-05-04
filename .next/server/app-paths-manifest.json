@@ -1,5 +1,7 @@
 {
-  "/page": "app/page.js",
+  "/not-found": "app/not-found.js",
+  "/(features)/construction-sites/page": "app/(features)/construction-sites/page.js",
   "/(features)/home/page": "app/(features)/home/page.js",
-  "/(features)/construction-diaries/page": "app/(features)/construction-diaries/page.js"
+  "/(features)/plans/page": "app/(features)/plans/page.js",
+  "/(features)/construction-sites/planlist/page": "app/(features)/construction-sites/planlist/page.js"
 }

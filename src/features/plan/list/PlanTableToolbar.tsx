@@ -9,9 +9,11 @@ import { Autocomplete, Button, TextField } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { SyntheticEvent, useEffect, useState } from "react";
 
-interface IPlanTableToolbar {}
+interface IPlanTableToolbar {
+  enabled: boolean;
+}
 
-export default function PlanTableToolbar({}: IPlanTableToolbar) {
+export default function PlanTableToolbar({enabled}: {enabled: boolean;}) {
   const setLoading = useLoadingAnimation();
   const setAlert = useAlert();
   const router = useRouter();
@@ -47,35 +49,41 @@ export default function PlanTableToolbar({}: IPlanTableToolbar) {
     }
   }
 
-  return (
-    <div className="h-20 px-3 flex justify-between items-center bg-content">
-      <Autocomplete
-        className="bg-white w-96"
-        size="small"
-        disablePortal
-        noOptionsText="Không có kết quả tìm kiếm phù hợp"
-        options={constructionSites}
-        getOptionLabel={(option: IConstructionSite) =>
-          "#" + option.constructionsiteid + " " + option.constructionsitename
-        }
-        onInputChange={handleInputChange}
-        onChange={handleAutocompleteChange}
-        renderInput={(params) => <TextField {...params} label="Nhập mã hoặc tên công trình" />}
-      />
-
-      <div className="flex gap-3">
-        <Button
-          className=" bg-color-btn-send hover:bg-color-btn-send ml-2"
-          variant="contained"
+  if (enabled===false) { // Nếu enabled là false, không render gì cả
+    return null;
+  }
+  else {
+    return (
+      <div className="h-20 px-3 flex justify-between items-center bg-content">
+        <Autocomplete
+          className="bg-white w-96"
           size="small"
-          onClick={() => router.push("/plans/create")}
-        >
-          <span className="mx-2">
-            <Icon name="plus" size="lg" />
-          </span>
-          Thêm mới
-        </Button>
+          disablePortal
+          noOptionsText="Không có kết quả tìm kiếm phù hợp"
+          options={constructionSites}
+          getOptionLabel={(option: IConstructionSite) =>
+            "#" + option.constructionsiteid + " " + option.constructionsitename
+          }
+          onInputChange={handleInputChange}
+          onChange={handleAutocompleteChange}
+          renderInput={(params) => <TextField {...params} label="Nhập mã hoặc tên công trình" />}
+        />
+  
+        <div className="flex gap-3">
+          <Button
+            className=" bg-color-btn-send hover:bg-color-btn-send ml-2"
+            variant="contained"
+            size="small"
+            onClick={() => router.push("/plans/create")}
+          >
+            <span className="mx-2">
+              <Icon name="plus" size="lg" />
+            </span>
+            Thêm mới
+          </Button>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+  
 }

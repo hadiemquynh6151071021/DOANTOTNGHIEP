@@ -11,13 +11,16 @@ import useAlert from "@/hooks/useAlert";
 import TableRow from "@/components/table/TableRow";
 import planAPI, { PlanListType } from "@/apis/plan";
 import { getVNLocaleDateString } from "@/utils/functions/getLocaleDateString";
+import IPlan from "@/models/Plan";
 
 interface IPlanTableProps {
-	planType: PlanListType
+	planType: PlanListType;
+	enabled: boolean;
 }
 
 export default function PlanTable({
-	planType
+	planType,
+	enabled,
 }: IPlanTableProps) {
 	// set up page
 	const setLoading = useLoadingAnimation();
@@ -86,7 +89,7 @@ export default function PlanTable({
 	return (
 		<TableLayout>
 			{/* Toolbar  */}
-			<PlanTableToolbar />
+			<PlanTableToolbar enabled={enabled.valueOf()}/>
 
 			{/* Table  */}
 			<TableContainer sx={{ maxHeight: 460 }}>

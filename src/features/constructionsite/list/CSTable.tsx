@@ -107,7 +107,7 @@ export default function CSTable({
 					{filteredRows.map(row => (
 						<TableRow
 							key={row.constructionId}
-							href={`plans?constructionsiteid=${row.constructionId}`}
+							href={`construction-sites/planlist`}
 							// http://localhost:8080/api/plans?constructionsiteid=1
 							cells={[
 								{
