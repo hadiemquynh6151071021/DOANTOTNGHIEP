@@ -59,6 +59,7 @@ const planAPI = {
     create: (data: ICreatePlan) => request.post("/plans/save", data),
     approve: (approve: IApprovePlan) => request.post("plans/approve", approve),
     getList: (type: PlanListType) => request.get<IPlan[]>(`/plans?id=${type}`), // TODO ???
+    getListFromCS: (type: PlanListType, constructionsiteid: number) => request.get<IPlan[]>(`plans?id=${type}&constructionsiteid=${constructionsiteid}`),
     getPlanWorkItemsByPlanId: (planId: number) => request.get<IPlanWorkItem[]>(`/plans/getlistbyplanid/${planId}`),
     getProductsByPlanTaskId: (planTaskId: number) => request.get<IPlanTaskProduct[]>(`/plans/plantaskproduct/${planTaskId}`),
     getLaborsByPlanTaskId: (planTaskId: number) => request.get<IPlanTaskLabor[]>(`/plans/plantasklabor/${planTaskId}`),

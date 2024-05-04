@@ -83,9 +83,7 @@ export default function CSTable({
 		}
 	}
 
-	const handleClick = () => {
-		alert("Click")
-	}
+	
 
 	return (
 		<TableLayout>
@@ -107,7 +105,8 @@ export default function CSTable({
 					{filteredRows.map(row => (
 						<TableRow
 							key={row.constructionId}
-							href={`construction-sites/planlist`}
+							href={`/construction-sites/${row.constructionId}`}
+
 							// http://localhost:8080/api/plans?constructionsiteid=1
 							cells={[
 								{

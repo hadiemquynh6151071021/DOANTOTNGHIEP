@@ -16,11 +16,15 @@ import IPlan from "@/models/Plan";
 interface IPlanTableProps {
 	planType: PlanListType;
 	enabled: boolean;
+	plansFromCE: boolean;
+	constructionsiteid: number;
 }
 
 export default function PlanTable({
 	planType,
 	enabled,
+	plansFromCE,
+	constructionsiteid
 }: IPlanTableProps) {
 	// set up page
 	const setLoading = useLoadingAnimation();
@@ -61,9 +65,15 @@ export default function PlanTable({
 	async function fetchRecentDiaries() {
 		setLoading(true);
 		try {
-			const plans = await planAPI.getList(planType);
-			
-			const convertedPlans = plans.map(plan => ({
+			let plans;
+			if(plansFromCE.valueOf()===false){
+				plans = await planAPI.getList(planType.valueOf());
+			}
+			else{
+				//alert(constructionsiteid.valueOf().toString());
+				plans = await planAPI.getListFromCS(planType.valueOf(),constructionsiteid.valueOf());
+			}
+			let convertedPlans = plans.map(plan => ({
 				construction: "",
 				createdDate: "",
 				plan: plan.planname + " " + plan.planid,
