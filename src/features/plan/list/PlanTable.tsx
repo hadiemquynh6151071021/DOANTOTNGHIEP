@@ -26,6 +26,7 @@ export default function PlanTable({
 	plansFromCE,
 	constructionsiteid
 }: IPlanTableProps) {
+
 	// set up page
 	const setLoading = useLoadingAnimation();
 	const setAlert = useAlert();
@@ -53,6 +54,7 @@ export default function PlanTable({
 	const handleChangePage = (event: unknown, newPage: number) => {
 		setPage(newPage);
 	};
+
 	const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setRowsPerPage(parseInt(event.target.value, 10));
 		setPage(0);
@@ -74,10 +76,9 @@ export default function PlanTable({
 				plans = await planAPI.getListFromCS(planType.valueOf(),constructionsiteid.valueOf());
 			}
 			let convertedPlans = plans.map(plan => ({
-				construction: "",
+				construction: plan.mdConstructionSite.constructionsitename ,
 				createdDate: "",
-				plan: plan.planname + " " + plan.planid,
-				planId: plan.planid + "",
+				plan:  "#" + plan.planidcode + "  " + plan.planname ,
 				startDate: getVNLocaleDateString(plan.startdate),
 				endDate: getVNLocaleDateString(plan.enddate),
 			}));

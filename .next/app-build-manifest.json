@@ -26,26 +26,6 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(features)/home/layout.js"
     ],
-    "/(features)/construction-sites/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(features)/construction-sites/page.js"
-    ],
-    "/(features)/construction-sites/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(features)/construction-sites/layout.js"
-    ],
-    "/(features)/cost-estimates/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(features)/cost-estimates/page.js"
-    ],
-    "/(features)/cost-estimates/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(features)/cost-estimates/layout.js"
-    ],
     "/(features)/plans/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -56,30 +36,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(features)/plans/page.js"
     ],
-    "/(features)/plans/[id]/page": [
+    "/(features)/construction-sites/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(features)/plans/[id]/page.js"
+      "static/chunks/app/(features)/construction-sites/page.js"
     ],
-    "/(features)/construction-diaries/page": [
+    "/(features)/construction-sites/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(features)/construction-diaries/page.js"
-    ],
-    "/(features)/construction-diaries/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(features)/construction-diaries/layout.js"
-    ],
-    "/(features)/construction-diaries/create/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(features)/construction-diaries/create/page.js"
-    ],
-    "/(features)/construction-sites/planlist/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(features)/construction-sites/planlist/layout.js"
+      "static/chunks/app/(features)/construction-sites/layout.js"
     ],
     "/(features)/construction-sites/[id]/page": [
       "static/chunks/webpack.js",

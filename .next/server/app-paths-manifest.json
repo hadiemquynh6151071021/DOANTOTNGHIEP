@@ -1,7 +1,6 @@
 {
-  "/(features)/plans/[id]/page": "app/(features)/plans/[id]/page.js",
   "/(features)/plans/page": "app/(features)/plans/page.js",
-  "/(features)/construction-sites/page": "app/(features)/construction-sites/page.js",
+  "/(features)/home/page": "app/(features)/home/page.js",
   "/(features)/construction-sites/[id]/page": "app/(features)/construction-sites/[id]/page.js",
-  "/(features)/cost-estimates/page": "app/(features)/cost-estimates/page.js"
+  "/(features)/construction-sites/page": "app/(features)/construction-sites/page.js"
 }
