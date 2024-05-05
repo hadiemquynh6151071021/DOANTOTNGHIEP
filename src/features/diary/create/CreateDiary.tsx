@@ -263,7 +263,8 @@ export default function CreateDiary() {
 
       products: listSaveDiaryProduct,
       labors: listSaveDiaryLabor,
-      dateOfDiary: `${dateOfDiary.year()}-${dateOfDiary.month() + 1}-${dateOfDiary.date()}`,
+      dateOfDiary: dateOfDiary.format("YYYY-MM-DD").toString()
+      //dateOfDiary: `${dateOfDiary.year()}-${dateOfDiary.month() + 1}-${dateOfDiary.date()}`,
     };
 
     await diaryApi.saveDiary(newDiary);
@@ -355,60 +356,3 @@ export default function CreateDiary() {
   );
 }
 
-const initlistLabors: ILaborList = {
-  labors: [
-    {
-      isSelected: false,
-      no: 1,
-      laborCode: "#EL0001",
-      firstName: "Diễm Quỳnh",
-      lastName: "Hà",
-      role: "Công nhân",
-      shift: 8,
-    },
-    {
-      isSelected: false,
-      no: 2,
-      laborCode: "#EL0002",
-      firstName: "Hồ Hoàng Vy",
-      lastName: "Chu",
-      role: "Công nhân",
-      shift: 4,
-    },
-    {
-      isSelected: false,
-      no: 2,
-      laborCode: "#EL0003",
-      firstName: "Thị Vân Khánh",
-      lastName: "Nguyễn",
-      role: "Công nhân",
-      shift: 8,
-    },
-  ],
-};
-
-const initlistProducts: IProductList = {
-  products: [
-    {
-      no: 1,
-      pdId: "#PD0001",
-      pdName: "Xi măng",
-      pdUnit: "Bao",
-      pdAmount: 5,
-    },
-    {
-      no: 2,
-      pdId: "#PD0002",
-      pdName: "Cát",
-      pdUnit: "m3",
-      pdAmount: 100,
-    },
-    {
-      no: 3,
-      pdId: "#PD0003",
-      pdName: "Đá",
-      pdUnit: "m3",
-      pdAmount: 80,
-    },
-  ],
-};

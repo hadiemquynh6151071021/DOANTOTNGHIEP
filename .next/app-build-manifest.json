@@ -50,6 +50,36 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/(features)/construction-sites/[id]/page.js"
+    ],
+    "/(features)/construction-diaries/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(features)/construction-diaries/page.js"
+    ],
+    "/(features)/construction-diaries/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(features)/construction-diaries/layout.js"
+    ],
+    "/(features)/construction-diaries/[id]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(features)/construction-diaries/[id]/page.js"
+    ],
+    "/(features)/construction-diaries/create/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(features)/construction-diaries/create/page.js"
+    ],
+    "/(features)/plans/create/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(features)/plans/create/page.js"
+    ],
+    "/(features)/construction-diaries/approve/[id]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(features)/construction-diaries/approve/[id]/page.js"
     ]
   }
 }
