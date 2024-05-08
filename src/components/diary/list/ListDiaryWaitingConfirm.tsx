@@ -30,6 +30,8 @@ export default function ListDiaryWaitingConfirm() {
   };
 
   React.useEffect(() => {
+    // const token = localStorage.getItem('token');
+    // alert(token);
     fetchInitialData();
   }, []);
 

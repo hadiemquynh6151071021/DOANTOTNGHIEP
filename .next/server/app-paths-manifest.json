@@ -1,8 +1,3 @@
 {
-  "/(features)/construction-diaries/[id]/page": "app/(features)/construction-diaries/[id]/page.js",
-  "/(features)/construction-diaries/create/page": "app/(features)/construction-diaries/create/page.js",
-  "/(features)/construction-diaries/approve/[id]/page": "app/(features)/construction-diaries/approve/[id]/page.js",
-  "/(features)/plans/page": "app/(features)/plans/page.js",
-  "/(features)/construction-diaries/page": "app/(features)/construction-diaries/page.js",
-  "/(features)/plans/create/page": "app/(features)/plans/create/page.js"
+  "/page": "app/page.js"
 }

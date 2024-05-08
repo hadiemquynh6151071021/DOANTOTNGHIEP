@@ -8,6 +8,32 @@ import useAlert from "@/hooks/useAlert";
 import { useRouter } from "next/navigation";
 import useLoadingAnimation from "@/hooks/useLoadingAnimation";
 import accountAPI from "@/apis/account";
+const jwt = require("jsonwebtoken")
+
+export function checkPermission(token: string | null, role: string): boolean {
+  if (!token) return false;
+  try {
+      const listRole = jwt.decode(token);
+      console.log(listRole);
+      const subArray = listRole.sub.slice(1,-1).split(', ');
+      console.log(subArray);
+      {
+        subArray.map(role =>{
+          if(role === 'Trưởng nhóm'){
+            alert("Đây là trưởng nhóm")
+          }
+          else if(role === 'Trưởng phòng'){
+            alert("Đây là trưởng phòng")
+          }
+        })
+      }
+      return ;
+  } catch (error) {
+      console.error('Lỗi khi giải mã token:', error);
+      return false;
+  }
+}
+
 
 export default function LoginSection() {
   const router = useRouter();
@@ -33,9 +59,25 @@ export default function LoginSection() {
   async function handleLogin() {
     setLoading(true);
     try {
-      await accountAPI.login(inputs["username"].value, inputs["password"].value);
+      
+      const response = await accountAPI.login(inputs["username"].value, inputs["password"].value);
+      //const token1 = response.token;
+      // const roles = response.roles;
 
-      router.push("/home");
+      //localStorage.setItem('accessToken', token1);
+      const token = localStorage.getItem('accessToken');
+      const hasPermission = checkPermission(token, 'Trưởng nhóm');
+      //console.log({token, hasPermission})
+      //alert(hasPermission)
+    //   if (!token || !hasPermission) {
+    //     alert("AAAAAAAAAAAAAAAAa")
+    //   // Chuyển hướng người dùng đến trang không có quyền truy cập
+    //   // router.push('/unauthorized');
+    // }
+    // else{
+    //   alert("BBBBBBBBBBBBBbb")
+    // }
+      
 
       setAlert({
         message: "Đăng nhập thành công!",
