@@ -10,29 +10,54 @@ import useLoadingAnimation from "@/hooks/useLoadingAnimation";
 import accountAPI from "@/apis/account";
 const jwt = require("jsonwebtoken")
 
-export function checkPermission(token: string | null, role: string): boolean {
-  if (!token) return false;
-  try {
-      const listRole = jwt.decode(token);
-      console.log(listRole);
-      const subArray = listRole.sub.slice(1,-1).split(', ');
-      console.log(subArray);
-      {
-        subArray.map(role =>{
-          if(role === 'Trưởng nhóm'){
-            alert("Đây là trưởng nhóm")
-          }
-          else if(role === 'Trưởng phòng'){
-            alert("Đây là trưởng phòng")
-          }
-        })
-      }
-      return ;
-  } catch (error) {
-      console.error('Lỗi khi giải mã token:', error);
+// export function checkPermission(token: string | null): boolean {
+//   if (!token) return false;
+//   try {
+//       const listRole = jwt.decode(token);
+//       console.log(listRole);
+//       const subArray = listRole.sub.slice(1,-1).split(', ');
+//       console.log(subArray);
+//       {
+//         subArray.map(role =>{
+//           if(role === 'Trưởng nhóm'){
+//             alert("Đây là trưởng nhóm")
+//           }
+//           else if(role === 'Trưởng phòng'){
+//             alert("Đây là trưởng phòng")
+//           }
+//         })
+//       }
+//       return ;
+//   } catch (error) {
+//       console.error('Lỗi khi giải mã token:', error);
+//       return false;
+//   }
+// }
+
+export function isTokenExpired(token: string | null) {
+    if (!token) {
       return false;
-  }
+    }
+    else{
+      const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    const payload = JSON.parse(jsonPayload);
+    const expirationTime = payload.exp * 1000; // Thời gian hết hạn của token (được tính bằng giây, cần chuyển đổi thành miligiây)
+    return Date.now() > expirationTime; // Trả về true nếu thời gian hiện tại lớn hơn thời gian hết hạn của token, ngược lại trả về false
+    }
 }
+
+// export function checkTokenExpired(router) {
+//   const token = localStorage.getItem('accessToken');
+//   if (!token || isTokenExpired(token)) {
+//     router.push('');
+//   }
+// }
+
 
 
 export default function LoginSection() {
@@ -61,18 +86,28 @@ export default function LoginSection() {
     try {
       
       const response = await accountAPI.login(inputs["username"].value, inputs["password"].value);
-      //const token1 = response.token;
+      const token = response.token;
       // const roles = response.roles;
+      // localStorage.removeItem('accessToken');
 
-      //localStorage.setItem('accessToken', token1);
-      const token = localStorage.getItem('accessToken');
-      const hasPermission = checkPermission(token, 'Trưởng nhóm');
+
+      localStorage.setItem('accessToken', token);
+      // const token1 = localStorage.getItem('accessToken');
+		  // alert(token1);
+
+
+      // console.log(token1);
+      // //const token = localStorage.getItem('accessToke');
+      // localStorage.removeItem('accessToke');
+      // const token2 = localStorage.getItem('accessToken');
+      // console.log(token2);
+      // const hasPermission = checkPermission(token1, 'Trưởng nhóm');
       //console.log({token, hasPermission})
       //alert(hasPermission)
     //   if (!token || !hasPermission) {
     //     alert("AAAAAAAAAAAAAAAAa")
     //   // Chuyển hướng người dùng đến trang không có quyền truy cập
-    //   // router.push('/unauthorized');
+    router.push('/home');
     // }
     // else{
     //   alert("BBBBBBBBBBBBBbb")

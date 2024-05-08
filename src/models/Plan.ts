@@ -1,6 +1,8 @@
+import IConstructionSite from "./ConstructionSite";
 import { IEmployee } from "./Employee";
 
 export default interface IPlan {
+    mdConstructionSite: IConstructionSite;
     planid: number;
     planname: string;
     planidcode: string;

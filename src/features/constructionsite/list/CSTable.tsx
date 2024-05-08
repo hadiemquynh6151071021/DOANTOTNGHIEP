@@ -1,6 +1,6 @@
 "use client";
 import { Order } from "@/utils/functions/sort";
-import { Table, TableContainer, TablePagination} from "@mui/material";
+import { Button, Table, TableContainer, TablePagination} from "@mui/material";
 import { useEffect, useState } from "react";
 import { IConstructionData, headCells } from "./constants";
 import useLoadingAnimation from "@/hooks/useLoadingAnimation";
@@ -11,6 +11,8 @@ import TableLayout from "@/components/table/TableLayout";
 import EnhancedTableHead from "@/components/table/EnhancedTableHead";
 import TableRow from "@/components/table/TableRow";
 import { getVNLocaleDateString } from "@/utils/functions/getLocaleDateString";
+import router, { useRouter } from "next/router";
+import { isTokenExpired } from "@/features/login/LoginSection";
 
 interface IConstructionTableProps {
 	constructionType: ConstructionListType
@@ -82,6 +84,15 @@ export default function CSTable({
 			setLoading(false);
 		}
 	}
+	// async function tokenExpired() {
+	// 	const token = localStorage.getItem('accessToken');
+	// 	if (isTokenExpired(token)) {
+	// 		// Token đã hết hạn, thực hiện các hành động tương ứng (ví dụ: chuyển hướng trang)
+	// 		window.location.href = 'https://fahasha.com';
+	// 	}
+	// }
+
+	
 
 	
 
@@ -91,6 +102,7 @@ export default function CSTable({
 			{/* <CSTableToolbar /> */}
 
 			{/* Table  */}
+			{/* <Button onClick={handle}>AAAA</Button> */}
 			<TableContainer sx={{ maxHeight: 460 }}>
 				<Table
 					stickyHeader

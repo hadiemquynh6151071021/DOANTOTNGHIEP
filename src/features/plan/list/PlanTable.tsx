@@ -11,7 +11,6 @@ import useAlert from "@/hooks/useAlert";
 import TableRow from "@/components/table/TableRow";
 import planAPI, { PlanListType } from "@/apis/plan";
 import { getVNLocaleDateString } from "@/utils/functions/getLocaleDateString";
-import IPlan from "@/models/Plan";
 
 interface IPlanTableProps {
 	planType: PlanListType;
@@ -72,7 +71,7 @@ export default function PlanTable({
 				plans = await planAPI.getList(planType.valueOf());
 			}
 			else{
-				//alert(constructionsiteid.valueOf().toString());
+				
 				plans = await planAPI.getListFromCS(planType.valueOf(),constructionsiteid.valueOf());
 			}
 			let convertedPlans = plans.map(plan => ({
