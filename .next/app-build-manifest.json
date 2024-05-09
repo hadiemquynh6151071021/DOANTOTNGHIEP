@@ -1,5 +1,16 @@
 {
   "pages": {
+    "/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/layout.css",
+      "static/chunks/app/layout.js"
+    ],
+    "/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/page.js"
+    ],
     "/(features)/home/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -10,36 +21,35 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(features)/home/layout.js"
     ],
-    "/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/layout.css",
-      "static/chunks/app/layout.js"
-    ],
     "/(features)/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/(features)/layout.js"
     ],
-    "/(features)/construction-sites/layout": [
+    "/(features)/construction-diaries/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(features)/construction-sites/layout.js"
+      "static/chunks/app/(features)/construction-diaries/page.js"
     ],
-    "/(features)/construction-sites/page": [
+    "/(features)/construction-diaries/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(features)/construction-sites/page.js"
+      "static/chunks/app/(features)/construction-diaries/layout.js"
     ],
-    "/page": [
+    "/(features)/construction-diaries/approve/[id]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
+      "static/chunks/app/(features)/construction-diaries/approve/[id]/page.js"
     ],
-    "/(features)/login/page": [
+    "/(features)/construction-diaries/[id]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(features)/login/page.js"
+      "static/chunks/app/(features)/construction-diaries/[id]/page.js"
+    ],
+    "/(features)/construction-diaries/confirm/[id]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(features)/construction-diaries/confirm/[id]/page.js"
     ]
   }
 }

@@ -14,7 +14,7 @@ export default function Page() {
     const [token, setToken] = useState(null);
 
     useEffect(() => {
-        const storedToken = localStorage.getItem('accessToken');
+        const storedToken = localStorage.getItem('token');
         setToken(storedToken);
     }, []);
 

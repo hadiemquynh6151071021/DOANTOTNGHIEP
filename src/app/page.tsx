@@ -7,7 +7,5 @@ import PlanTable from "@/features/plan/list/PlanTable";
 export default function Home() {
   return (
     <Login />
-    // <CSTableToolbar/>
-    // <CSTable constructionType={1}/>
   );
 }

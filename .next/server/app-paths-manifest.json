@@ -1,5 +1,7 @@
 {
   "/page": "app/page.js",
-  "/(features)/construction-sites/page": "app/(features)/construction-sites/page.js",
-  "/(features)/home/page": "app/(features)/home/page.js"
+  "/(features)/home/page": "app/(features)/home/page.js",
+  "/(features)/construction-diaries/page": "app/(features)/construction-diaries/page.js",
+  "/(features)/construction-diaries/[id]/page": "app/(features)/construction-diaries/[id]/page.js",
+  "/(features)/construction-diaries/confirm/[id]/page": "app/(features)/construction-diaries/confirm/[id]/page.js"
 }

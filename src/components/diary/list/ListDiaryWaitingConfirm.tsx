@@ -7,12 +7,14 @@ import ListDiaries from "./ListDiaries";
 import React from "react";
 import IDiary from "@/models/Diary";
 import { useRouter } from "next/navigation";
+import { checkPermission } from "@/models/Token";
 
 export default function ListDiaryWaitingConfirm() {
   const [filterValue, setFilterValue] = useState(0);
   const [listDiariesConfirm, setListDiariesReview] = React.useState<IDiary[]>(
     []
   );
+  const [token, setToken] = useState(null);
 
   const fetchInitialData = async () => {
     if (filterValue != 0) {
@@ -30,14 +32,18 @@ export default function ListDiaryWaitingConfirm() {
   };
 
   React.useEffect(() => {
-    // const token = localStorage.getItem('token');
-    // alert(token);
+    const storedToken = localStorage.getItem('token');
+    setToken(storedToken);
     fetchInitialData();
   }, []);
 
   const router = useRouter();
   const handleDoubleClick = (id: number) => {
-    router.push("/construction-diaries/confirm/" + id);
+    if(checkPermission(token)===1 || checkPermission(token)===2){
+      router.push("/construction-diaries/" + id);
+    }
+    else {
+      router.push("/construction-diaries/confirm/" + id);}
   };
 
   async function handleChangeFilter(value: number) {

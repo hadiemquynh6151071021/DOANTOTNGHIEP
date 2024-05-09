@@ -8,6 +8,7 @@ import useAlert from "@/hooks/useAlert";
 import { useRouter } from "next/navigation";
 import useLoadingAnimation from "@/hooks/useLoadingAnimation";
 import accountAPI from "@/apis/account";
+import { checkPermission } from "@/models/Token";
 const jwt = require("jsonwebtoken")
 
 // export function checkPermission(token: string | null): boolean {
@@ -90,19 +91,18 @@ export default function LoginSection() {
       // const roles = response.roles;
       // localStorage.removeItem('accessToken');
 
-
-      localStorage.setItem('accessToken', token);
+      localStorage.setItem('token', token);
       // const token1 = localStorage.getItem('accessToken');
 		  // alert(token1);
 
 
+      
+      //const token1 = localStorage.getItem('token');
       // console.log(token1);
-      // //const token = localStorage.getItem('accessToke');
       // localStorage.removeItem('accessToke');
       // const token2 = localStorage.getItem('accessToken');
       // console.log(token2);
-      // const hasPermission = checkPermission(token1, 'Trưởng nhóm');
-      //console.log({token, hasPermission})
+      //console.log(checkPermission(token1))
       //alert(hasPermission)
     //   if (!token || !hasPermission) {
     //     alert("AAAAAAAAAAAAAAAAa")
