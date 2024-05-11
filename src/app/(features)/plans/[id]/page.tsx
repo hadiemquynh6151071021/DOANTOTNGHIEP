@@ -1,3 +1,4 @@
+
 import Login from "@/features/login/Login"
 import PlanDetail from "@/features/plan/detail/PlanDetail"
 import MainContainer from "@/layouts/MainContainer"
@@ -8,6 +9,8 @@ export default function Page({
 }: {
     params: { id: number }
 }) {
+ 
+    
     return (
         <PageContainer
             breadcrumbs={[
@@ -25,7 +28,8 @@ export default function Page({
             ]}
         >
             <MainContainer>
-                <PlanDetail planId={id} />
+                <PlanDetail planId={33}/>
+                
             </MainContainer>
         </PageContainer>
     )

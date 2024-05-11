@@ -77,7 +77,7 @@ export default function PlanTable({
 			let convertedPlans = plans.map(plan => ({
 				construction: plan.mdConstructionSite.constructionsitename ,
 				createdDate: "",
-				plan:  "#" + plan.planidcode + "  " + plan.planname ,
+				plan:  "#" + plan.planId + "  " + plan.planname ,
 				startDate: getVNLocaleDateString(plan.startdate),
 				endDate: getVNLocaleDateString(plan.enddate),
 			}));
