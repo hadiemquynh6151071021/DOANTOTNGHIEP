@@ -8,6 +8,7 @@ import { DatePicker } from "@mui/x-date-pickers";
 import dayjs, { Dayjs } from "dayjs";
 import { ChangeEvent, useState } from "react";
 import PopupTaskDetail from "./PopupTaskDetail/PopupTaskDetail";
+import IPlanTask from "@/models/PlanTask";
 
 export interface ITempPlanTask {
 	isSelected: boolean; // TEMP
@@ -32,62 +33,59 @@ export interface ITempPlanTask {
 export default function Task({
 	task,
 	orderIndex,
-	onChangeTask,
+	// onChangeTask,
 }: {
-	task: ITempPlanTask,
+	task: IPlanTask,
 	orderIndex: number;
-	onChangeTask: (newTask: ITempPlanTask) => void;
+	// onChangeTask: (newTask: IPlanTask) => void;
 }) {
 	const {
 		isSelected,
 
-		startDate,
-		endDate,
-		taskCode,
-		taskName,
+		startdate,
+		enddate,
+		taskcode,
+		taskname,
 
-		labors,
-		products
+		// labors,
+		// products
 	} = task;
-	const [currentStartDate, setCurrentStartDate] = useState<Dayjs | null>(null);
-	const [currentEndDate, setCurrentEndDate] = useState<Dayjs | null>(null);
 
 	const {
 		setModal,
 	} = useModal();
 
-	const duration = (endDate != null && startDate != null)
-		? (getDuration(startDate, endDate)) : 0;
-
-	function handleChangeIsSelected(e: ChangeEvent<HTMLInputElement>) {
-		onChangeTask({
-			...task,
-			isSelected: e.target.checked
-		});
-	}
+	// function handleChangeIsSelected(e: ChangeEvent<HTMLInputElement>) {
+	// 	onChangeTask({
+	// 		...task,
+	// 		isSelected: e.target.checked
+	// 	});
+	// }
 
 	return (
 		<div className="h-16 pl-16 pr-2 flex justify-between items-center hover:bg-content bg-white">
-			<div className="flex w-50 gap-2">
+			<div className="flex w-100 gap-2">
 				<span className="font-semibold">
-					No
+					{orderIndex}
 				</span>
 			</div>
-			<div className="flex w-100 gap-2 justify-center ">
-				<span className="font-semibold">
-					{/* {taskName} */}
-					Bé
-				</span>
-				<span className="text-apple-gray">
-					{/* #{taskCode} */}
-					#111
-				</span>
+			<div className="flex w-96 gap-2 ">
+				<div>
+					<span className="font-semibold">
+						{/* {taskName} */}
+						{task.taskname}
+					</span>
+					<span className="text-apple-gray">
+						{/* #{taskCode} */}
+						#{task.taskcode}
+					</span>
+				</div>
 			</div>
 			<div className="flex w-100 gap-2 ">
-				Ngày bắt đầu
+				{task.startdate}
 			</div>
 			<div className="flex w-100 gap-2 ">
-				Ngày kết thúc
+				{task.enddate}
 			</div>
 			<IconButton
 				name="up-right-from-square"
@@ -95,15 +93,16 @@ export default function Task({
 					setModal({
 						children:
 							<PopupTaskDetail
-								key={labors.toString()}
-								labors={labors}
-								products={products}
-								onChangeLabors={(newLabors: IEmployee[]) => {
-									onChangeTask({
-										...task,
-										labors: newLabors
-									});
-								}}
+								key={orderIndex}
+								planId={task.plantaskid}
+								// labors={labors}
+								// products={products}
+								// onChangeLabors={(newLabors: IEmployee[]) => {
+								// 	onChangeTask({
+								// 		...task,
+								// 		labors: newLabors
+								// 	});
+								// }}
 							/>
 					});
 				}}

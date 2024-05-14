@@ -1,8 +1,7 @@
-import IPlan from "@/models/Plan";
+import IPlan, { IPlanOverviewProps } from "@/models/Plan";
 import request from "./request";
-import IPlanTaskProduct from "@/models/PlanTaskProduct";
-import IPlanTaskLabor from "@/models/PlanTaskLabor";
 import IPlanWorkItem from "@/models/PlanWorkItem";
+import { IPlanTaskLabor, IPlanTaskProduct } from "@/models/PlanTask";
 
 export interface ICreatePlan {
     planname: string;
@@ -55,14 +54,19 @@ export const enum PlanListType {
     Rejected = 3,
 }
 
-const planAPI = {
+const  planAPI = {
     create: (data: ICreatePlan) => request.post("/plans/save", data),
     approve: (approve: IApprovePlan) => request.post("plans/approve", approve),
     getList: (type: PlanListType) => request.get<IPlan[]>(`/plans?id=${type}`), // TODO ???
-    getListFromCS: (type: PlanListType, constructionsiteid: number) => request.get<IPlan[]>(`plans?id=${type}&constructionsiteid=${constructionsiteid}`),
+    getListFromCS: (type: PlanListType, constructionsiteid: number) => request.get<IPlan[]>(`/plans?id=${type}&constructionsiteid=${constructionsiteid}`),
     getPlanWorkItemsByPlanId: (planId: number) => request.get<IPlanWorkItem[]>(`/plans/getlistbyplanid/${planId}`),
     getProductsByPlanTaskId: (planTaskId: number) => request.get<IPlanTaskProduct[]>(`/plans/plantaskproduct/${planTaskId}`),
     getLaborsByPlanTaskId: (planTaskId: number) => request.get<IPlanTaskLabor[]>(`/plans/plantasklabor/${planTaskId}`),
+    getOverviewPlanById: (planId: number) => request.get<IPlanOverviewProps[]>(`/plans?planid=${planId}`),
+    getCountplantask: (id: number) => request.get<String>(`/plans/countplantask/${id}`),
+    
+    // getListProductByPlanTaskId: (planTaskId: number) => request.get<IPlanTaskProduct>(`/plans/plantaskproduct/${planTaskId}`),
+    // getListLaborsByPlanTaskId: (planTaskId: number) => request.get<IPlanTaskLabor>(`/plans/plantasklabor/${planTaskId}`),
 };
 
 export default planAPI;

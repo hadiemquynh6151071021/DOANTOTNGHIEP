@@ -2,93 +2,80 @@
 
 import useAlert from "@/hooks/useAlert";
 import useLoadingAnimation from "@/hooks/useLoadingAnimation";
-import IPlan from "@/models/Plan";
+import IPlan, { IPlanOverviewProps } from "@/models/Plan";
 import { useEffect, useState } from "react";
 import PlanOverviewSection from "./PlanOverviewSection";
 import IPlanWorkItem from "@/models/PlanWorkItem";
 import PlanWorkItemLayout from "./PlanWorkItem/PlanWorkItemLayout";
 import { ICostEstimate } from "../create-rework/CreatePlan";
 import PlanWorkItemSection from "./PlanWorkItem/PlanWorkItemSection";
+import planAPI from "@/apis/plan";
 
 interface IPlanDetailProps {
-    planId: number;
+  planId: number;
 }
 
-export default function PlanDetail({
-    planId
-}: IPlanDetailProps) {
-    // SUP
-    const setAlert = useAlert();
-    const setLoading = useLoadingAnimation();
+export default function PlanDetail({ planId }: { planId: number }) {
+  // SUP
+  const setAlert = useAlert();
+  const setLoading = useLoadingAnimation();
+  const [viewState, setViewState] = useState<"list" | "gantt">("list");
 
-    // Data
-    const [planOverview, setPlanOverview] = useState<IPlan>();
-    const [planWorkItems, setPlanWorkItems] = useState<IPlanWorkItem[]>([]);
-    const [viewState, setViewState] = useState<"list" | "gantt">("list");
-    const [costEstimateId, setCostEstimateId] = useState<number>();
-    const [planEstimate, setPlanEstimate] = useState<ICostEstimate>({
-        planName: "",
-        startDate: null,
-        endDate: null,
-    });
+  // Data
+  const [planOverview, setPlanOverview] = useState<IPlanOverviewProps>();
+  const [planWorkItems, setPlanWorkItems] = useState<IPlanWorkItem[]>([]);
+  const [numberOfTasksDone, setNumberOfTasksDone] = useState<number>()
 
-    useEffect(() => {
-        fetchPlan();
-    }, []);
+  const fetchPlanDetail = async () => {
+    const planOverview: IPlanOverviewProps[] =
+      (await planAPI.getOverviewPlanById(planId)) || [];
+    const listPlanWorkItem =
+      (await planAPI.getPlanWorkItemsByPlanId(planId)) || [];
+    const numberOfTasksDone: number = parseInt((await planAPI.getCountplantask(planId)).valueOf());
 
-    async function fetchPlan() {
-        setLoading(true);
-        try {
-            // Call API plan overview + workitems
-            // Set to states
-        }
-        catch (ex) {
-            setAlert({
-                message: "Xảy ra lỗi trong quá trình load Kế hoạch! Vui lòng thử lại.",
-                severity: "error"
-            });
-        }
-        finally {
-            setLoading(false);
-        }
-    }
-    const fakeData = {
-        plId: "ABC123",
-        plName: "Kế hoạch ABC",
-        startDate: new Date(),
-        endDate: new Date(),
-        creator: "Người tạo",
-        createTime: new Date(),
-        approver: "Người duyệt",
-        approvedTime: new Date(),
-        csId: "CS001",
-        csName: "Công trình XYZ",
-        totalNumberOfEmployees: 100,
-        totalNumberOfLabors: 50,
-        Supervision: "Supervisor",
-      };
-    return (
-        <div className="pt-5 flex flex-col gap-10">
+    setPlanOverview(planOverview[0]);
+    setPlanWorkItems(listPlanWorkItem);
+    setNumberOfTasksDone(numberOfTasksDone);
+  };
 
-            <PlanOverviewSection  plOverView={
-                    fakeData
-                }/>
-            <PlanWorkItemLayout
-                    onClickChangeView={(newState: "list" | "gantt") => {
-                        //setViewState(newState);
-                    }}
-                >
-                    {viewState == "list" ? (
-                        <PlanWorkItemSection
-                            key={costEstimateId}
-                            costEstimateId={costEstimateId}
-                        />
-                    ) : (
-                        <div className="w-full min-h-full">
+  let numberOfWorkItems = 0;
+  let numberOfTasks = 0;
+  numberOfWorkItems = planWorkItems.length;
+  planWorkItems.map((item) => {
+    numberOfTasks += item.mdTasks.length;
+  });
 
-                        </div>
-                    )}
-                </PlanWorkItemLayout>
+  useEffect(() => {
+    fetchPlanDetail();
+  }, []);
+
+  return (
+    <div className="pt-5 flex flex-col gap-10">
+      {planOverview != undefined && (
+        <div>
+          <PlanOverviewSection
+            plOverView={planOverview as IPlanOverviewProps}
+            numberOfWorkItems={numberOfWorkItems}
+            numberOfTasks={numberOfTasks}
+            numberOfTasksDone={numberOfTasksDone}
+          />
+          <PlanWorkItemLayout
+            onClickChangeView={(newState: "list" | "gantt") => {
+              //setViewState(newState);
+            }}
+          >
+            {viewState == "list" ? (
+              <PlanWorkItemSection
+                plworkitem={planWorkItems as IPlanWorkItem[]}
+                numberOfWorkItems={numberOfWorkItems}
+                numberOfTasks={numberOfTasks}
+              />
+            ) : (
+              <div className="w-full min-h-full"></div>
+            )}
+          </PlanWorkItemLayout>
         </div>
-    )
+      )}
+    </div>
+  );
 }

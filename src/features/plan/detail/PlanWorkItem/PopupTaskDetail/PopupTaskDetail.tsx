@@ -1,28 +1,39 @@
 import {  Tab, Tabs } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TaskLaborSection from "./TaskLaborSection/TaskLaborSection";
 import TaskProductSection from "./TaskProductSection/TaskProductSection";
 import { IEmployee } from "@/models/Employee";
 import Icon from "@/components/Icon";
 import { CustomTabPanel } from "@/components/TabPanel";
 import ICostEstimateTaskProduct from "@/models/CostEstimateTaskProduct";
+import { IPlanTaskLabor, IPlanTaskProduct } from "@/models/PlanTask";
+import planAPI from "@/apis/plan";
+import IProduct from "@/models/Product";
 
 export default function PopupTaskDetail({
-    labors,
-    products,
-
-    onChangeLabors,
+    planId
 }: {
-    labors: IEmployee[];
-    products: ICostEstimateTaskProduct[];
+    planId: number
     
-    onChangeLabors: (newLabors: IEmployee[]) => void;
+    //onChangeLabors: (newLabors: IEmployee[]) => void;
 }) {
     const [value, setValue] = useState(0);
+    const [labors, setLabors] = useState<IPlanTaskLabor[]>([]);
+    const [products, setProducts] = useState<IPlanTaskProduct[]>([]);
 
     const handleChangeTab = (event: React.SyntheticEvent, newValue: number) => {
       setValue(newValue);
     };
+
+    const fetchPlanDetail = async () =>{
+        const labors: IPlanTaskLabor[] = await planAPI.getLaborsByPlanTaskId(planId);
+        const products: IPlanTaskProduct[] = await planAPI.getProductsByPlanTaskId(planId);
+
+        setLabors(labors);
+        setProducts(products);
+    }
+
+    useEffect(() => {fetchPlanDetail()},[])
 
     return (
         <div className="min-w-[800px] h-[560px] flex flex-col bg-white rounded-2xl overflow-hidden">
@@ -51,9 +62,9 @@ export default function PopupTaskDetail({
                 index={0}
             >
                 <TaskLaborSection
-                    key={labors.toString()}
+                    // key={labors}
                     labors={labors}
-                    onChangeLabors={onChangeLabors}
+                    // onChangeLabors={onChangeLabors}
                 />
             </CustomTabPanel>
             <CustomTabPanel

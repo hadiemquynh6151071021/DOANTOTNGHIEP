@@ -1,54 +1,54 @@
 "use client";
 import Icon from "@/components/Icon";
-import IconButton from "@/components/IconButton";
-import PopupAddSupervisor from "@/components/plan/create/PopupAddSupervisor";
-import { IEmployee } from "@/models/Employee";
-import { Checkbox } from "@mui/material";
 import { ChangeEvent, useState } from "react";
-import { ITempPlanWorkItem } from "./PlanWorkItemSection";
 import Task, { ITempPlanTask } from "./PlanTask";
 import useModal from "@/hooks/useModal";
+import IPlanWorkItem from "@/models/PlanWorkItem";
 
 export interface IPlanWorkItemProps {
 	orderIndex: number,
-	workItem: ITempPlanWorkItem;
-	onWorkItemChange: (newOne: ITempPlanWorkItem) => void;
+	workItem: IPlanWorkItem;
+	onWorkItemChange: (newOne: IPlanWorkItem) => void;
 }
 
 export default function PlanWorkItem({
+	orderIndex,
 	workItem,
-	onWorkItemChange,
-}: IPlanWorkItemProps) {
+	//onWorkItemChange,
+}:{
+	orderIndex: number,
+	workItem: IPlanWorkItem
+}) {
 	const {
 		isSelected,
-		orderIndex,
-		supervisor,
-		tasks,
-		workItemCode,
-		workItemName,
+		orderindex,
+		workitemid,
+		workitemCode,
+		workitemname,
+		employeeid,
+		firstname,
+		idcard,
+		lastname,
+		userid,
+		mdTasks
 	} = workItem;
 	const { setModal, setIsOpenModal } = useModal();
 	const [isShow, setIsShow] = useState(true);
 
-	function handleChangeIsSelected(e: ChangeEvent<HTMLInputElement>) {
-		onWorkItemChange({
-			...workItem,
-			isSelected: e.target.checked
-		});
+	const x = 1+1;
 
-		setIsShow(false);
-	}
+	function handleChangeIsShow() {
+		setIsShow(!isShow);
+	  }
 
-	function handleChangeTask(newTask: ITempPlanTask) {
-		const idx = tasks.findIndex((t) => t.taskCode == newTask.taskCode);
+	// function handleChangeIsSelected(e: ChangeEvent<HTMLInputElement>) {
+	// 	onWorkItemChange({
+	// 		...workItem,
+	// 		isSelected: e.target.checked
+	// 	});
 
-		if (idx >= 0) {
-			onWorkItemChange({
-				...workItem,
-				tasks: [...tasks.slice(0, idx), newTask, ...tasks.slice(idx + 1)],
-			});
-		}
-	}
+	// 	setIsShow(false);
+	// }
 
 	return (
 		<section className="flex flex-col">
@@ -56,36 +56,44 @@ export default function PlanWorkItem({
 				<Icon
 					className="grid place-items-center w-8 h-8 cursor-pointer hover:text-dark "
 					name={isShow ? "angle-down" : "angle-right"}
-					onClick={() => {
-						isSelected && setIsShow(!isShow)
-					}}
+					onClick={handleChangeIsShow}
 				/>
-				{/* <Checkbox
-					className=" "
-					checked={isSelected}
-					onChange={handleChangeIsSelected}
-				/> */}
-				<span className="w-6 text-end">{orderIndex}</span>
+
+				<span className="w-6 text-end">{orderindex}</span>
 				<div className="w-140 flex gap-3  ">
-					<p className="text-dark font-semibold">{workItemName}</p>
-					<span className="text-apple-gray">#{workItemCode}</span>
+					<p className="text-dark font-semibold">{workitemname}</p>
+					<span className="text-apple-gray">#{workitemCode}</span>
 					<p className="flex gap-2">
 								<span className="font-bold">
 									{/* {supervisor.firstname + " " + supervisor.lastname} */}
-									Hà Diễm Quỳnh
+									{firstname + " " + lastname}
 								</span>
 								{/* {supervisor.employeeid} */}
-								10
+								{employeeid}
 					</p>
 					<p className="flex gap-2">
+						
 								4/4
 					</p>
 					<p className="flex gap-2">
 								100%
 					</p>
-					<p className="flex gap-2">
-								Done
-					</p>
+					<span
+						className={` px-3  ${
+							x == 1
+							? "bg-[#CCE0F1] text-[#3498DB]"
+							: (x == 2
+							? "bg-[#EAE5A5] text-[#C9B917]"
+							: (x == 3
+							? "bg-[#C7E7E5] text-[#30C1A5]"
+							: (x == 4
+							? "bg-[#ebbfba] text-[#E74C3C]"
+							: "bg-[#ebbfba] text-[#E74C3C]")))
+						} rounded-3xl font-semibold w-fit`}
+						>
+          				{/* {stateName} */}
+						Done
+        			</span>
 				</div>
 				<section className="flex items-center gap-2 ml-auto">
 					<div className="flex gap-3 items-center ">
@@ -116,12 +124,11 @@ export default function PlanWorkItem({
 				</section>
 			</header>
 			{isShow &&
-				workItem.tasks.map((task, idx) => (
+				workItem.mdTasks.map((task, idx) => (
 					<Task
-						key={task.taskCode}
+						key={task.taskcode}
 						task={task}
 						orderIndex={idx + 1}
-						onChangeTask={handleChangeTask}
 					/>
 				))}
 		</section>

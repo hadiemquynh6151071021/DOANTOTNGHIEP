@@ -45,11 +45,11 @@ export default function ListDiaryTab() {
         <ListDiaryWaitingApprove />
         <PageNumber />
       </CustomTabPanel>
-      <CustomTabPanel value={value} index={3}>
+      <CustomTabPanel value={value} index={4}>
         <ListDiaryDenyConfirm />
         <PageNumber />
       </CustomTabPanel>
-      <CustomTabPanel value={value} index={4}>
+      <CustomTabPanel value={value} index={5}>
         <ListDiaryDenyApprove />
         <PageNumber />
       </CustomTabPanel>

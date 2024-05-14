@@ -19,7 +19,9 @@ export default function DetailDiary({ value}:{value: number}){
     setLabors(lsLabor);
     setProducts(lsProduct);
   }
-  useEffect(() => {fetchDiaryDetail()},[])
+  useEffect(() => {
+    fetchDiaryDetail()
+  },[])
     
     return(
         <div className=" bg-background-color">

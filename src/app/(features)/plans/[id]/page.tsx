@@ -28,7 +28,7 @@ export default function Page({
             ]}
         >
             <MainContainer>
-                <PlanDetail planId={33}/>
+                <PlanDetail planId={id}/>
                 
             </MainContainer>
         </PageContainer>

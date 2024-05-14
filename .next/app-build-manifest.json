@@ -1,9 +1,19 @@
 {
   "pages": {
-    "/page": [
+    "/(features)/construction-diaries/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
+      "static/chunks/app/(features)/construction-diaries/page.js"
+    ],
+    "/(features)/construction-diaries/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(features)/construction-diaries/layout.js"
+    ],
+    "/(features)/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(features)/layout.js"
     ],
     "/layout": [
       "static/chunks/webpack.js",
@@ -11,35 +21,20 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/(features)/home/page": [
+    "/(features)/construction-diaries/confirm/[id]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(features)/home/page.js"
+      "static/chunks/app/(features)/construction-diaries/confirm/[id]/page.js"
     ],
-    "/(features)/home/layout": [
+    "/(features)/construction-diaries/[id]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(features)/home/layout.js"
+      "static/chunks/app/(features)/construction-diaries/[id]/page.js"
     ],
-    "/(features)/layout": [
+    "/(features)/construction-diaries/approve/[id]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(features)/layout.js"
-    ],
-    "/(features)/plans/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(features)/plans/page.js"
-    ],
-    "/(features)/plans/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(features)/plans/layout.js"
-    ],
-    "/(features)/plans/[id]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(features)/plans/[id]/page.js"
+      "static/chunks/app/(features)/construction-diaries/approve/[id]/page.js"
     ]
   }
 }

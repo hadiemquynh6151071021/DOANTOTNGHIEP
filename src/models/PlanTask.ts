@@ -1,4 +1,8 @@
+import { IEmployee } from "./Employee";
+import IProduct from "./Product";
+
 export default interface IPlanTask {
+    isSelected: boolean;
     amountofwork: number;
 
     costestimateid: number;
@@ -21,4 +25,14 @@ export default interface IPlanTask {
     workitemid: number;
     workitemcode: string;
     workitemname: string;
+}
+
+export interface IPlanTaskLabor{
+    plantasklaborid: number;
+    mdEmployee: IEmployee;
+}
+
+export interface IPlanTaskProduct {
+    planTaskProductId:number;
+    mdProduct: IProduct;
 }
