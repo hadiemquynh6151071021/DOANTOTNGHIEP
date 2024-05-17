@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import ListPicture, { IImagesList } from "../ListPicture";
+import ListPicture from "../ListPicture";
 import ListProductsDiary from "../ListProductsDiary";
 import ListProblem from "../ListProblem";
 import Image from "next/image";

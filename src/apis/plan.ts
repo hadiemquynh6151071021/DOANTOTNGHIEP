@@ -2,6 +2,7 @@ import IPlan, { IPlanOverviewProps } from "@/models/Plan";
 import request from "./request";
 import IPlanWorkItem from "@/models/PlanWorkItem";
 import { IPlanTaskLabor, IPlanTaskProduct } from "@/models/PlanTask";
+import { ISaveHistory } from "@/models/ISaveHistory";
 
 export interface ICreatePlan {
     planname: string;
@@ -64,7 +65,7 @@ const  planAPI = {
     getLaborsByPlanTaskId: (planTaskId: number) => request.get<IPlanTaskLabor[]>(`/plans/plantasklabor/${planTaskId}`),
     getOverviewPlanById: (planId: number) => request.get<IPlanOverviewProps[]>(`/plans?planid=${planId}`),
     getCountplantask: (id: number) => request.get<String>(`/plans/countplantask/${id}`),
-    
+    saveApprove: (history: ISaveHistory) => request.post<ISaveHistory>(`/plans/approve`, history),
     // getListProductByPlanTaskId: (planTaskId: number) => request.get<IPlanTaskProduct>(`/plans/plantaskproduct/${planTaskId}`),
     // getListLaborsByPlanTaskId: (planTaskId: number) => request.get<IPlanTaskLabor>(`/plans/plantasklabor/${planTaskId}`),
 };

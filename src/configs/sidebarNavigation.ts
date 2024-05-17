@@ -23,12 +23,12 @@ export const constructionNavList : INavigation[] = [
         text: "Công trình",
         href: "/construction-sites"
     },
-    {
-        id: Navigation.CostEstimates,
-        icon: "calculator",
-        text: "Dự toán",
-        href: "/cost-estimates"
-    },
+    // {
+    //     id: Navigation.CostEstimates,
+    //     icon: "calculator",
+    //     text: "Dự toán",
+    //     href: "/cost-estimates"
+    // },
     {
         id: Navigation.Plans,
         icon: "chart-gantt",
@@ -50,12 +50,12 @@ export const userNavList: INavigation[] = [
         text: "Hồ sơ cá nhân",
         href: "/profile"
     },
-    {
-        id: Navigation.Settings,
-        icon: "gear",
-        text: "Cài đặt",
-        href: "/settings"
-    },
+    // {
+    //     id: Navigation.Settings,
+    //     icon: "gear",
+    //     text: "Cài đặt",
+    //     href: "/settings"
+    // },
     {
         id: Navigation.Logout,
         icon: "right-from-bracket",

@@ -24,7 +24,7 @@ export default function PlanInfo({
   planCode: string;
   creatorDiary: string;
   createTime: string;
-   stateID: number;
+  stateID: number;
   stateName: string;  lsHistory: IDiaryHistory[];
 }) {
   const setAlert = useAlert();

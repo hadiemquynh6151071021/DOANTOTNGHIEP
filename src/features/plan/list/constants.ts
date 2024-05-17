@@ -1,7 +1,7 @@
 import { IHeadCell } from "@/components/table/constants";
 
 export interface IPlanData {
-    planId: string;
+    planId: number;
     construction: string;
     plan: string;
     startDate: string;

@@ -11,6 +11,9 @@ import useAlert from "@/hooks/useAlert";
 import TableRow from "@/components/table/TableRow";
 import planAPI, { PlanListType } from "@/apis/plan";
 import { getVNLocaleDateString } from "@/utils/functions/getLocaleDateString";
+import IPlan from "@/models/Plan";
+import { checkPermission } from "@/models/Token";
+import { useRouter } from "next/router";
 
 interface IPlanTableProps {
 	planType: PlanListType;
@@ -34,6 +37,8 @@ export default function PlanTable({
 	const [rows, setRows] = useState<IPlanData[]>([]);
 	const [filteredRows, setFilteredRows] = useState<IPlanData[]>([]);
 	const [selectedCS, setSelectedCS] = useState("");
+	const [token, setToken] = useState(null);
+	const [url, setUrl] = useState<string>("");
 
 	// <EnhancedTableHead />
 	const [order, setOrder] = useState<Order>('desc');
@@ -59,25 +64,43 @@ export default function PlanTable({
 		setPage(0);
 	};
 
+	// const handleDoubleClick = (id: number) => {
+	//   if(checkPermission(token)===2){
+	// 	router.push("/construction-diaries/" + id);
+	//   }
+	//   else {
+	// 	router.push("/construction-diaries/approve/" + id);}
+	// };
+
 	useEffect(() => {
+		setURL();
 		fetchRecentDiaries();
 	}, []);
+
+	function setURL() {
+		if(checkPermission(token)===2){
+			setUrl("/plans/")
+		}
+			else {
+			setUrl("/plans/approve/")}
+	}
 
 	async function fetchRecentDiaries() {
 		setLoading(true);
 		try {
 			let plans;
 			if(plansFromCE.valueOf()===false){
-				plans = await planAPI.getList(planType.valueOf());
+				plans = await planAPI.getList(planType.valueOf()) || [];
 			}
 			else{
 				
 				plans = await planAPI.getListFromCS(planType.valueOf(),constructionsiteid.valueOf());
 			}
 			let convertedPlans = plans.map(plan => ({
+				planId: plan.planid,
 				construction: plan.mdConstructionSite.constructionsitename ,
-				createdDate: "",
-				plan:  "#" + plan.planId + "  " + plan.planname ,
+				createdDate: plan.createddate,
+				plan:  "#" + plan.planid + "  " + plan.planname ,
 				startDate: getVNLocaleDateString(plan.startdate),
 				endDate: getVNLocaleDateString(plan.enddate),
 			}));
@@ -116,7 +139,7 @@ export default function PlanTable({
 					{filteredRows.map(row => (
 						<TableRow
 							key={row.planId}
-							href={`/plans/${row.planId}`}
+							href={url.toString()+row.planId}
 							cells={[
 								{
 									value: row.construction
@@ -157,3 +180,5 @@ export default function PlanTable({
 		</TableLayout>
 	)
 }
+
+
