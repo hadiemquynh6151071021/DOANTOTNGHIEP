@@ -8,7 +8,8 @@ export const enum LaborType {
 
 const employeeAPI = {
     getList: (laborType: LaborType) =>
-        request.get<IEmployee[]>(`/employees/search?labor=${laborType}&name`)
+        request.get<IEmployee[]>(`/employees/search?labor=${laborType}&name`),
+    getEmployees: (skillids: number[], skillrankids: number[]) => request.get<IEmployee[]> (`/a/search?skillIds=${skillids}&skillRankId=${skillrankids}`)
 };
 
 export default employeeAPI;

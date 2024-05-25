@@ -19,6 +19,7 @@ export interface ITempPlanTask {
 	amountOfWork: number; // NEW
 	quantityUnitName: string;
 	quantityUnitId: number;
+	costestimatetaskid: number
 
 	startDate: Date | null; // NEW
 	endDate: Date | null; // NEW
@@ -45,7 +46,7 @@ export default function Task({
 		endDate,
 		taskCode,
 		taskName,
-
+		costestimatetaskid,
 		labors,
 		products
 	} = task;
@@ -127,6 +128,7 @@ export default function Task({
 						children:
 							<PopupTaskDetail
 								key={labors.toString()}
+								costestimatetaskid={costestimatetaskid}
 								labors={labors}
 								products={products}
 								onChangeLabors={(newLabors: IEmployee[]) => {

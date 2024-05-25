@@ -2,6 +2,7 @@ import ICostEstimate from "@/models/CostEstimate";
 import request from "./request";
 import ICostEstimateWorkItem from "@/models/CostEstimateWorkItem";
 import ICostEstimateTaskProduct from "@/models/CostEstimateTaskProduct";
+import ICostEstimateTaskSkill from "@/models/CostEstiamteTaskSkill";
 
 const costEstimateAPI = {
     getListCodeAndName: (constructionSiteId: number) =>
@@ -19,6 +20,8 @@ const costEstimateAPI = {
     
     getListCostEstimateTaskProducts: (costEstimateTaskId: number) =>
         request.get<ICostEstimateTaskProduct[]>(`costestimatetaskproduct/getlistbycostestimatetaskid/${costEstimateTaskId}`),
+    getCostEstimateTaskSkill: (costEstimateTaskId: number) =>
+        request.get<ICostEstimateTaskSkill>(`taskskill?costestimatetaskid=${costEstimateTaskId}`)
 };
 
 export default costEstimateAPI;

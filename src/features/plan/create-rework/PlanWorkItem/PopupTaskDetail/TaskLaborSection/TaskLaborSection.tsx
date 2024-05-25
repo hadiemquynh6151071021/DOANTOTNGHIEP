@@ -3,11 +3,15 @@ import { useEffect, useState } from "react";
 import { IEmployee } from "@/models/Employee";
 import employeeAPI, { LaborType } from "@/apis/employee";
 import TaskLaborItem from "./TaskLaborItem";
+import costEstimateAPI from "@/apis/costEstimate";
+import CostEstimateTaskSkill from "@/models/CostEstiamteTaskSkill";
 
 export default function TaskLaborSection({
+	costestimatetaskid,
 	labors,
 	onChangeLabors,
 }: {
+	costestimatetaskid: number;
 	labors: IEmployee[];
 	onChangeLabors: (newLabors: IEmployee[]) => void;
 }) {
@@ -17,13 +21,18 @@ export default function TaskLaborSection({
 	const [listLabors, setListLabors] = useState<IEmployee[]>([]);
 
 	useEffect(() => {
+		
+		// alert('costestimatetaskskill2'+costestimatetaskskill);
+		// console.log(costestimatetaskskill);
 		setupData();
 	}, [labors]);
 
 	async function setupData() {
 		setCurrentLabors(labors);
 		try {
-			const workers = await employeeAPI.getList(LaborType.Worker);
+			// const workers = await employeeAPI.getList(LaborType.Worker);
+			const listSkillAndRank = await costEstimateAPI.getCostEstimateTaskSkill(costestimatetaskid);
+			const workers = await employeeAPI.getEmployees(listSkillAndRank.skillrankid,listSkillAndRank.skillrankid);
 			setListLabors(workers);
 		}
 		catch (ex) {
@@ -79,6 +88,7 @@ export default function TaskLaborSection({
 				{currentLabors.length ? (
 					currentLabors.map((labor) => (
 						<TaskLaborItem
+							key={labor.employeeid}
 							labor={labor}
 							onUnselectLabor={() => {
 								const currentIdx = currentLabors.findIndex(l => l.employeeid == labor.employeeid)

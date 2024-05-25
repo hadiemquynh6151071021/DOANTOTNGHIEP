@@ -81,6 +81,7 @@ export default function PlanWorkItemSection({
 						amountOfWork: 10,
 						quantityUnitId: t.quantityunitid,
 						quantityUnitName: t.quantityunitname,
+						costestimatetaskid: t.costestimatetaskid,
 
 						startDate: null,
 						endDate: null,
