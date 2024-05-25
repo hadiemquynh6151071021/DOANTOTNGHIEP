@@ -1,9 +1,10 @@
 "use client";
 import Icon from "@/components/Icon";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import Task, { ITempPlanTask } from "./PlanTask";
 import useModal from "@/hooks/useModal";
 import IPlanWorkItem from "@/models/PlanWorkItem";
+import planAPI from "@/apis/plan";
 
 export interface IPlanWorkItemProps {
 	orderIndex: number,
@@ -14,10 +15,12 @@ export interface IPlanWorkItemProps {
 export default function PlanWorkItem({
 	orderIndex,
 	workItem,
+	planId
 	//onWorkItemChange,
 }:{
 	orderIndex: number,
-	workItem: IPlanWorkItem
+	workItem: IPlanWorkItem,
+	planId: number
 }) {
 	const {
 		isSelected,
@@ -34,12 +37,25 @@ export default function PlanWorkItem({
 	} = workItem;
 	const { setModal, setIsOpenModal } = useModal();
 	const [isShow, setIsShow] = useState(true);
+	const [amountOfWorkDoneWI, setAmountOfWorkDoneWI] = useState<number>()
+	const [percent, setPercent] = useState<number>()
 
 	const x = 1+1;
 
 	function handleChangeIsShow() {
 		setIsShow(!isShow);
 	  }
+
+	  const fetchData = async () => {
+		const amountOfWorkDoneWI : number = parseInt((await planAPI.getCountplantaskDoneOfWorkItem(planId, workItem.workitemid)).valueOf());
+		setAmountOfWorkDoneWI(amountOfWorkDoneWI);
+		setPercent(parseInt((amountOfWorkDoneWI/workItem.mdTasks.length*100).toFixed(0)))
+
+	  };
+	useEffect(() => {
+		fetchData()
+	})
+	
 
 	// function handleChangeIsSelected(e: ChangeEvent<HTMLInputElement>) {
 	// 	onWorkItemChange({
@@ -73,26 +89,29 @@ export default function PlanWorkItem({
 					</p>
 					<p className="flex gap-2">
 						
-								4/4
+								{amountOfWorkDoneWI}/{workItem.mdTasks.length}
 					</p>
 					<p className="flex gap-2">
-								100%
+							{percent}%
 					</p>
 					<span
 						className={` px-3  ${
-							x == 1
+							percent == 100
 							? "bg-[#CCE0F1] text-[#3498DB]"
-							: (x == 2
-							? "bg-[#EAE5A5] text-[#C9B917]"
-							: (x == 3
-							? "bg-[#C7E7E5] text-[#30C1A5]"
-							: (x == 4
+							: (percent == 0
 							? "bg-[#ebbfba] text-[#E74C3C]"
-							: "bg-[#ebbfba] text-[#E74C3C]")))
+							: (percent < 100
+							? "bg-[#EAE5A5] text-[#C9B917]"
+							: "bg-[#ebbfba] text-[#E74C3C]"))
 						} rounded-3xl font-semibold w-fit`}
 						>
-          				{/* {stateName} */}
-						Done
+						{percent == 100
+						? "Hoàn thành"
+						: (percent == 0
+						? "Chưa xử lý"
+						: percent < 100
+						? "Đang xử lý": "Xử lý vượt quy định")
+					}
         			</span>
 				</div>
 				<section className="flex items-center gap-2 ml-auto">

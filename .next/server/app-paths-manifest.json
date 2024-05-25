@@ -1,4 +1,7 @@
 {
   "/page": "app/page.js",
+  "/(features)/plans/create/page": "app/(features)/plans/create/page.js",
+  "/(features)/home/page": "app/(features)/home/page.js",
+  "/(features)/construction-sites/page": "app/(features)/construction-sites/page.js",
   "/(features)/plans/page": "app/(features)/plans/page.js"
 }

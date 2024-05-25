@@ -38,9 +38,10 @@ export default function PlanInfo({
     (item) => item.cmsDiaryAction.diaryactionid === 3
   )[0];
   const handleSubmitConfirm = () => {
+    const employeeId = parseInt(localStorage.getItem("employeeId"));
     var temp: ISaveHistory = {
       id: diaryId,
-      actorid: 1,
+      actorid: employeeId,
       actionid: 3,
       description: "",
     };
@@ -55,9 +56,10 @@ export default function PlanInfo({
   };
 
   function rejectConfirm() {
+    const employeeId = parseInt(localStorage.getItem("employeeId"));
     var temp: ISaveHistory = {
       id: diaryId,
-      actorid: 1,
+      actorid: employeeId,
       actionid: 5,
       description: "",
     };

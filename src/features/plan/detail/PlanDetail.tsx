@@ -69,6 +69,7 @@ export default function PlanDetail({ planId }: { planId: number }) {
                 plworkitem={planWorkItems as IPlanWorkItem[]}
                 numberOfWorkItems={numberOfWorkItems}
                 numberOfTasks={numberOfTasks}
+                planId={planId}
               />
             ) : (
               <div className="w-full min-h-full"></div>

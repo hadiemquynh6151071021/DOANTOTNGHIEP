@@ -3,6 +3,7 @@ import IPlanTask from "./PlanTask";
 export default interface IPlanWorkItem {
     isSelected: boolean;
     orderindex: number;
+    planworkitemid: number;
     workitemid: number;
     workitemCode: string;
     workitemname: string;

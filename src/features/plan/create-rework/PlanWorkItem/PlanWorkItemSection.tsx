@@ -62,7 +62,7 @@ export default function PlanWorkItemSection({
 				const tasks = workItemRes[i].taskDTOs;
 				for (let j = 0; j < tasks.length; j++) {
 					const task = tasks[j];
-					const productsRes = await costEstimateAPI.getListCostEstimateTaskProducts(task.taskid);
+					const productsRes = await costEstimateAPI.getListCostEstimateTaskProducts(task.costestimatetaskid);
 					workItemProducts.push(productsRes);
 				}
 

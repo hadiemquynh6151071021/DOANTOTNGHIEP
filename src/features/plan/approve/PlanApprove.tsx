@@ -51,11 +51,14 @@ export default function PlanApprove({ planId }: { planId: number }) {
   }, []);
 
   function rejectConfirm(): void {
+
+    const employeeId = parseInt(localStorage.getItem("employeeId"));
+
     var temp: ISaveHistory = {
       id: planId,
-      actorid: 1,
+      actorid: employeeId,
       actionid: 3,
-      description: "",
+      description: "Đã từ chối duyệt",
     };
 
     try {
@@ -68,11 +71,14 @@ export default function PlanApprove({ planId }: { planId: number }) {
   }
 
   function handleSubmitConfirm(): void {
+
+    const employeeId = parseInt(localStorage.getItem("employeeId"));
+
     var temp: ISaveHistory = {
       id: planId,
-      actorid: 1,
+      actorid: employeeId,
       actionid: 2,
-      description: "",
+      description: "Đã xác nhận duyệt",
     };
 
     try {

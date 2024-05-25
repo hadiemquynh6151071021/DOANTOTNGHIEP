@@ -22,10 +22,12 @@ export default function PlanWorkItemSection({
   plworkitem,
   numberOfWorkItems,
   numberOfTasks,
+  planId
 }: {
   plworkitem: IPlanWorkItem[];
   numberOfWorkItems: number;
   numberOfTasks: number;
+  planId: number;
 }) {
   const [formatData,setFormatData] = useState<IPlanWorkItem[]>([]);
 
@@ -72,6 +74,7 @@ export default function PlanWorkItemSection({
           key={wi.workitemid}
           orderIndex={idx + 1}
           workItem={wi}
+          planId={planId}
         />
       ))}
     </section>
