@@ -14,7 +14,7 @@ export default function ConstructionSiteInfoSection({
         startdate: startDate,
         enddate: endDate,
         mdConstructionType: constructionType,
-        mdEmployee: creator,
+        mdEmployee: creator
     }
 }: IConstructionSiteInfoSectionProps) {
     return (

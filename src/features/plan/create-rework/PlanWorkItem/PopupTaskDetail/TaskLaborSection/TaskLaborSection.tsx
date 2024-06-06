@@ -5,13 +5,16 @@ import employeeAPI, { LaborType } from "@/apis/employee";
 import TaskLaborItem from "./TaskLaborItem";
 import costEstimateAPI from "@/apis/costEstimate";
 import CostEstimateTaskSkill from "@/models/CostEstiamteTaskSkill";
+import { IAddress } from "@/models/ConstructionSite";
 
 export default function TaskLaborSection({
 	costestimatetaskid,
+	addressCS,
 	labors,
 	onChangeLabors,
 }: {
 	costestimatetaskid: number;
+	addressCS: IAddress;
 	labors: IEmployee[];
 	onChangeLabors: (newLabors: IEmployee[]) => void;
 }) {
@@ -31,8 +34,9 @@ export default function TaskLaborSection({
 		setCurrentLabors(labors);
 		try {
 			// const workers = await employeeAPI.getList(LaborType.Worker);
-			const listSkillAndRank = await costEstimateAPI.getCostEstimateTaskSkill(costestimatetaskid);
-			const workers = await employeeAPI.getEmployees(listSkillAndRank.skillrankid,listSkillAndRank.skillrankid);
+			const listSkillAndRank : CostEstimateTaskSkill = (await costEstimateAPI.getCostEstimateTaskSkill(costestimatetaskid));
+			const educationBackgroundId = await costEstimateAPI.getEducationBackground(costestimatetaskid);
+			const workers = await employeeAPI.getEmployees(listSkillAndRank,educationBackgroundId,addressCS.addressid);
 			setListLabors(workers);
 		}
 		catch (ex) {

@@ -73,8 +73,9 @@ export default function PlanTable({
 	// };
 
 	useEffect(() => {
+		const employeeId = parseInt(localStorage.getItem("employeeId"));
 		setURL();
-		fetchRecentDiaries();
+		fetchRecentPlan();
 	}, []);
 
 	function setURL() {
@@ -85,7 +86,7 @@ export default function PlanTable({
 			setUrl("/plans/approve/")}
 	}
 
-	async function fetchRecentDiaries() {
+	async function fetchRecentPlan() {
 		setLoading(true);
 		try {
 			let plans;

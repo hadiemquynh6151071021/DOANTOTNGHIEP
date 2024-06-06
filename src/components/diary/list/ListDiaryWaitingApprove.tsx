@@ -37,11 +37,12 @@ export default function ListDiaryWaitingApprove() {
 
   const router = useRouter();
   const handleDoubleClick = (id: number) => {
-    if(checkPermission(token)===3){
-      router.push("/construction-diaries/" + id);
+    if(checkPermission(token)===3 && checkPermission(token)===4){
+      router.push("/construction-diaries/approve/" + id);
     }
     else {
-      router.push("/construction-diaries/approve/" + id);}
+      router.push("/construction-diaries/" + id);
+      }
   };
 
   async function handleChangeFilter(value: number) {

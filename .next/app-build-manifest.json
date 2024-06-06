@@ -5,15 +5,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(features)/plans/create/page.js"
     ],
-    "/(features)/plans/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(features)/plans/layout.js"
-    ],
     "/(features)/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/(features)/layout.js"
+    ],
+    "/(features)/plans/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(features)/plans/layout.js"
     ],
     "/layout": [
       "static/chunks/webpack.js",

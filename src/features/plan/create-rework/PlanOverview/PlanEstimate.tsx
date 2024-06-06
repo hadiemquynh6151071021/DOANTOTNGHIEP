@@ -1,11 +1,13 @@
 import IconButton from "@/components/IconButton";
 import PopupAddSupervisor from "@/components/plan/create/PopupAddSupervisor";
 import useModal from "@/hooks/useModal";
+import { IAddress } from "@/models/ConstructionSite";
 import { IEmployee } from "@/models/Employee";
 import { getDuration } from "@/utils/functions/getDuration";
 import { TextField } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs, { Dayjs } from "dayjs";
+import { useState } from "react";
 
 export interface IPlanEstimate {
 	planName: string;
@@ -23,6 +25,7 @@ export default function PlanEstimate({
 	planEstimate,
 	onChangePlanEstimate,
 }: IPlanEstimateProps) {
+	const [employeePosition,setEmployeePosition] = useState(4);
 	const {
 		setIsOpenModal,
 		setModal
@@ -98,6 +101,7 @@ export default function PlanEstimate({
 						setModal({
 							children: (
 								<PopupAddSupervisor
+									employeePosition={employeePosition}
 									selectedSupervisorId={approver?.employeeid}
 									onChangeSupervisor={(approver?: IEmployee) => {
 										onChangePlanEstimate({

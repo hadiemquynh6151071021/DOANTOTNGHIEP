@@ -10,9 +10,11 @@ import { ITempPlanTask } from "./PlanTask";
 import { IEmployee } from "@/models/Employee";
 import ICostEstimateTaskProduct from "@/models/CostEstimateTaskProduct";
 import { isAxiosError } from "axios";
+import { IAddress } from "@/models/ConstructionSite";
 
 export interface IPlanWorkItemSectionProps {
 	costEstimateId: number;
+	addressCS: IAddress;
 	handleCreatePlan: (workItems: ITempPlanWorkItem[]) => void;
 }
 
@@ -30,6 +32,7 @@ export interface ITempPlanWorkItem {
 
 export default function PlanWorkItemSection({
 	costEstimateId,
+	addressCS,
 	handleCreatePlan,
 }: IPlanWorkItemSectionProps) {
 	const setLoading = useLoadingAnimation();
@@ -144,6 +147,7 @@ export default function PlanWorkItemSection({
 					key={wi.workItemId}
 					orderIndex={idx + 1}
 					workItem={wi}
+					addressCS={addressCS}
 					onWorkItemChange={(newWorkItem: ITempPlanWorkItem) => {
 						const index = workItems.findIndex(wi => wi.workItemId == newWorkItem.workItemId);
 

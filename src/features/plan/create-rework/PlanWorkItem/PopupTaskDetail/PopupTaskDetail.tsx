@@ -8,15 +8,18 @@ import { CustomTabPanel } from "@/components/TabPanel";
 import ICostEstimateTaskProduct from "@/models/CostEstimateTaskProduct";
 import costEstimateAPI from "@/apis/costEstimate";
 import CostEstimateTaskSkill from "@/models/CostEstiamteTaskSkill";
+import { IAddress } from "@/models/ConstructionSite";
 
 export default function PopupTaskDetail({
     costestimatetaskid,
+    addressCS,
     labors,
     products,
 
     onChangeLabors,
 }: {
     costestimatetaskid: number;
+    addressCS:IAddress;
     labors: IEmployee[];
     products: ICostEstimateTaskProduct[];
     
@@ -68,6 +71,7 @@ export default function PopupTaskDetail({
             >
                 <TaskLaborSection
                     key={labors.toString()}
+                    addressCS={addressCS}
                     costestimatetaskid={costestimatetaskid}
                     labors={labors}
                     onChangeLabors={onChangeLabors}

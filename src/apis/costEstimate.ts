@@ -21,7 +21,9 @@ const costEstimateAPI = {
     getListCostEstimateTaskProducts: (costEstimateTaskId: number) =>
         request.get<ICostEstimateTaskProduct[]>(`costestimatetaskproduct/getlistbycostestimatetaskid/${costEstimateTaskId}`),
     getCostEstimateTaskSkill: (costEstimateTaskId: number) =>
-        request.get<ICostEstimateTaskSkill>(`taskskill?costestimatetaskid=${costEstimateTaskId}`)
+        request.get<ICostEstimateTaskSkill>(`taskskill?costestimatetaskid=${costEstimateTaskId}`),
+    getEducationBackground:(costEstimateTaskId: number) =>
+        request.get<number>(`educationbackground?costestimatetaskid=${costEstimateTaskId}`)
 };
 
 export default costEstimateAPI;

@@ -2,7 +2,7 @@
 import CostEstimateInfoSection from "./CostEstimateInfoSection";
 import ConstructionSiteInfoSection from "./ConstructionSiteInfoSection";
 import { useState } from "react";
-import IConstructionSite from "@/models/ConstructionSite";
+import IConstructionSite, { IAddress } from "@/models/ConstructionSite";
 import SelectCostEstimateSection from "./SelectCostEstimateSection";
 import ICostEstimate from "@/models/CostEstimate";
 import useAlert from "@/hooks/useAlert";
@@ -12,11 +12,13 @@ import useLoadingAnimation from "@/hooks/useLoadingAnimation";
 
 export interface IPlanOverviewInfoLayoutProps {
 	children?: React.ReactNode;
+	onLoadConstructionSite: (constructionSiteid: number, addressCS: IAddress) => void
 	onLoadCostEstimate: (costEstimateId: number) => void;
 }
 
 export default function PlanOverviewInfoLayout({
 	children,
+	onLoadConstructionSite,
 	onLoadCostEstimate,
 }: IPlanOverviewInfoLayoutProps) {
 	const setAlert = useAlert();
@@ -47,7 +49,7 @@ export default function PlanOverviewInfoLayout({
 					if (costEstimate) {
 						setCostEstimateInfo(costEstimate);
 					}
-
+					onLoadConstructionSite(Number.parseInt(selectedCSId), constructionSite.mdAddress)
 					onLoadCostEstimate(Number.parseInt(selectedCEId));
 				}
 				catch (ex) {

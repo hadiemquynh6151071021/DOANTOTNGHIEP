@@ -9,7 +9,7 @@ import IDiary from "@/models/Diary";
 import { useRouter } from "next/navigation";
 import { checkPermission } from "@/models/Token";
 
-export default function ListDiaryWaitingConfirm() {
+export default function   ListDiaryWaitingConfirm() {
   const [filterValue, setFilterValue] = useState(0);
   const [listDiariesConfirm, setListDiariesReview] = React.useState<IDiary[]>(
     []
@@ -39,11 +39,12 @@ export default function ListDiaryWaitingConfirm() {
 
   const router = useRouter();
   const handleDoubleClick = (id: number) => {
-    if(checkPermission(token)===1 || checkPermission(token)===2){
-      router.push("/construction-diaries/" + id);
+    if(checkPermission(token)===1){
+      router.push("/construction-diaries/confirm/" + id);
     }
     else {
-      router.push("/construction-diaries/confirm/" + id);}
+      router.push("/construction-diaries/" + id);
+      }
   };
 
   async function handleChangeFilter(value: number) {

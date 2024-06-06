@@ -8,10 +8,12 @@ import { DatePicker } from "@mui/x-date-pickers";
 import dayjs, { Dayjs } from "dayjs";
 import { ChangeEvent, useState } from "react";
 import PopupTaskDetail from "./PopupTaskDetail/PopupTaskDetail";
+import { IAddress } from "@/models/ConstructionSite";
 
 export interface ITempPlanTask {
 	isSelected: boolean; // TEMP
 	orderIndex: number; // NEW
+
 
 	taskId: number; // NEW
 	taskName: string;
@@ -32,10 +34,12 @@ export interface ITempPlanTask {
 
 export default function Task({
 	task,
+	addressCS,
 	orderIndex,
 	onChangeTask,
 }: {
 	task: ITempPlanTask,
+	addressCS:IAddress;
 	orderIndex: number;
 	onChangeTask: (newTask: ITempPlanTask) => void;
 }) {
@@ -128,6 +132,7 @@ export default function Task({
 						children:
 							<PopupTaskDetail
 								key={labors.toString()}
+								addressCS={addressCS}
 								costestimatetaskid={costestimatetaskid}
 								labors={labors}
 								products={products}

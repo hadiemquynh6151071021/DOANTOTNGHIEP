@@ -2,11 +2,16 @@ import IConstructionState from "./ConstructionState";
 import IConstructionType from "./ConstructionType";
 import { IEmployee } from "./Employee";
 
+export interface IAddress{
+    addressid: number;
+    wardid: number;
+}
 export default interface IConstructionSite {
     constructionsiteid: number;
     constructionsitecode: string;
     constructionsitename: string;
     address: string;
+    mdAddress: IAddress;
 
     mdConstructionType: IConstructionType;
 
