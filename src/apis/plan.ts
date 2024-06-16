@@ -67,8 +67,10 @@ const  planAPI = {
     getCountplantask: (id: number) => request.get<String>(`/plans/countplantask?id=${id}`),
     getCountplantaskDoneOfWorkItem: (id: number, workItemId: number) => request.get<String>(`/plans/countplantask?id=${id}&workitemid=${workItemId}`),
     saveApprove: (history: ISaveHistory) => request.post<ISaveHistory>(`/plans/approve`, history),
-    // getListProductByPlanTaskId: (planTaskId: number) => request.get<IPlanTaskProduct>(`/plans/plantaskproduct/${planTaskId}`),
+    //getPlanByState(planstateid: number) => request.get<IPlan[]>(`/plans/plansbystate?planstate=${planstateid}`),
+    getListPlan: (planstateid: number) => request.get<IPlan[]>(`/plans/plansbystate/${planstateid}`),
     // getListLaborsByPlanTaskId: (planTaskId: number) => request.get<IPlanTaskLabor>(`/plans/plantasklabor/${planTaskId}`),
+    getWorlItemDone: (planId: number) => request.get<String>(`/plans/countworkitem?planid=${planId}`)
 };
 
 export default planAPI;

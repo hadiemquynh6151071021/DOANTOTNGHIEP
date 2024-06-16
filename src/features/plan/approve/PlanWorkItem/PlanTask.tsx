@@ -70,12 +70,12 @@ export default function Task({
 				</span>
 			</div>
 			<div className="flex w-96 gap-2 ">
-				<div>
-					<span className="font-semibold">
+				<div className=" gap-2">
+					<span className="font-semibold px-1">
 						{/* {taskName} */}
 						{task.taskname}
 					</span>
-					<span className="text-apple-gray">
+					<span className="text-apple-gray px-1">
 						{/* #{taskCode} */}
 						#{task.taskcode}
 					</span>

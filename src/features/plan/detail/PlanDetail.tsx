@@ -24,7 +24,8 @@ export default function PlanDetail({ planId }: { planId: number }) {
   // Data
   const [planOverview, setPlanOverview] = useState<IPlanOverviewProps>();
   const [planWorkItems, setPlanWorkItems] = useState<IPlanWorkItem[]>([]);
-  const [numberOfTasksDone, setNumberOfTasksDone] = useState<number>()
+  const [numberOfTasksDone, setNumberOfTasksDone] = useState<number>();
+  const [numberOfWIDone, setNumberOfWIDone] = useState<number>();
 
   const fetchPlanDetail = async () => {
     const planOverview: IPlanOverviewProps[] =
@@ -32,16 +33,19 @@ export default function PlanDetail({ planId }: { planId: number }) {
     const listPlanWorkItem =
       (await planAPI.getPlanWorkItemsByPlanId(planId)) || [];
     const numberOfTasksDone: number = parseInt((await planAPI.getCountplantask(planId)).valueOf());
+    const numberOfWIDone: number = parseInt((await planAPI.getWorlItemDone(planId)).valueOf());
 
     setPlanOverview(planOverview[0]);
     setPlanWorkItems(listPlanWorkItem);
     setNumberOfTasksDone(numberOfTasksDone);
+    setNumberOfWIDone(numberOfWIDone);
   };
 
   let numberOfWorkItems = 0;
   let numberOfTasks = 0;
   numberOfWorkItems = planWorkItems.length;
   planWorkItems.map((item) => {
+    numberOfWorkItems += 1;
     numberOfTasks += item.mdTasks.length;
   });
 
@@ -58,6 +62,7 @@ export default function PlanDetail({ planId }: { planId: number }) {
             numberOfWorkItems={numberOfWorkItems}
             numberOfTasks={numberOfTasks}
             numberOfTasksDone={numberOfTasksDone}
+            numberOfWIDone={numberOfWIDone}
           />
           <PlanWorkItemLayout
             onClickChangeView={(newState: "list" | "gantt") => {

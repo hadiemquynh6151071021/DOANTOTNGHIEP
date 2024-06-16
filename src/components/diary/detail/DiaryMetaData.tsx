@@ -62,7 +62,7 @@ export default function PlanInfo({
             {actionApprover != undefined && (
               <>
                 <p className=" font-semibold">Người duyệt</p>
-                {actionApprover.mdEmployee.firstname + actionApprover.mdEmployee.lastname}
+                {actionApprover.mdEmployee.firstname +" "+ actionApprover.mdEmployee.lastname}
                 <p className=" font-semibold">Ngày duyệt</p>
 
                 {getVNLocaleDateString(actionApprover.actiontime)}
@@ -75,7 +75,7 @@ export default function PlanInfo({
             {actionConfirmer != undefined && (
               <>
                 <p className=" font-semibold">Người đối chứng</p>
-                {actionConfirmer.mdEmployee.firstname + actionConfirmer.mdEmployee.lastname}
+                {actionConfirmer.mdEmployee.firstname +" "+ actionConfirmer.mdEmployee.lastname}
                 <p className=" font-semibold">Ngày đối chứng</p>
                 {getVNLocaleDateString(actionConfirmer.actiontime)}
               </>

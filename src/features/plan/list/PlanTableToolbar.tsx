@@ -5,6 +5,7 @@ import IconButton from "@/components/IconButton";
 import useAlert from "@/hooks/useAlert";
 import useLoadingAnimation from "@/hooks/useLoadingAnimation";
 import IConstructionSite from "@/models/ConstructionSite";
+import { checkPermission } from "@/models/Token";
 import { Autocomplete, Button, TextField } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { SyntheticEvent, useEffect, useState } from "react";
@@ -13,18 +14,23 @@ interface IPlanTableToolbar {
   enabled: boolean;
 }
 
-export default function PlanTableToolbar({enabled}: {enabled: boolean;}) {
+export default function PlanTableToolbar({ enabled }: { enabled: boolean }) {
   const setLoading = useLoadingAnimation();
   const setAlert = useAlert();
   const router = useRouter();
+  const [token, setToken] = useState(null);
 
-  const [constructionSites, setConstructionSites] = useState<IConstructionSite[]>([]);
+  const [constructionSites, setConstructionSites] = useState<
+    IConstructionSite[]
+  >([]);
 
   useEffect(() => {
     fetchConstructions();
   }, []);
 
   async function fetchConstructions() {
+    const storedToken = localStorage.getItem("token");
+    setToken(storedToken);
     try {
       setLoading(true);
       const CSRes = (await constructionSiteAPI.getListActive()) || [];
@@ -49,10 +55,10 @@ export default function PlanTableToolbar({enabled}: {enabled: boolean;}) {
     }
   }
 
-  if (enabled===false) { // Nếu enabled là false, không render gì cả
+  if (enabled === false) {
+    // Nếu enabled là false, không render gì cả
     return null;
-  }
-  else {
+  } else {
     return (
       <div className="h-20 px-3 flex justify-between items-center bg-content">
         <Autocomplete
@@ -66,24 +72,27 @@ export default function PlanTableToolbar({enabled}: {enabled: boolean;}) {
           }
           onInputChange={handleInputChange}
           onChange={handleAutocompleteChange}
-          renderInput={(params) => <TextField {...params} label="Nhập mã hoặc tên công trình" />}
+          renderInput={(params) => (
+            <TextField {...params} label="Nhập mã hoặc tên công trình" />
+          )}
         />
-  
         <div className="flex gap-3">
-          <Button
-            className=" bg-color-btn-send hover:bg-color-btn-send ml-2"
-            variant="contained"
-            size="small"
-            onClick={() => router.push("/plans/create")}
-          >
-            <span className="mx-2">
-              <Icon name="plus" size="lg" />
-            </span>
-            Thêm mới
-          </Button>
+        
+          {checkPermission(token) != 3 && ( 
+            <Button
+              className=" bg-color-btn-send hover:bg-color-btn-send ml-2"
+              variant="contained"
+              size="small"
+              onClick={() => router.push("/plans/create")}
+            >
+              <span className="mx-2">
+                <Icon name="plus" size="lg" />
+              </span>
+              Thêm mới
+            </Button>
+          )}
         </div>
       </div>
     );
   }
-  
 }

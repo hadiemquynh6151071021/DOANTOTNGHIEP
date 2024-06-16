@@ -57,15 +57,6 @@ export default function PlanWorkItem({
 	})
 	
 
-	// function handleChangeIsSelected(e: ChangeEvent<HTMLInputElement>) {
-	// 	onWorkItemChange({
-	// 		...workItem,
-	// 		isSelected: e.target.checked
-	// 	});
-
-	// 	setIsShow(false);
-	// }
-
 	return (
 		<section className="flex flex-col">
 			<header className="sticky top-16 h-14 px-2 flex gap-6 items-center justify-start text-apple-gray bg-apple-gray-6 border-t z-10 overflow-hidden">
@@ -76,26 +67,24 @@ export default function PlanWorkItem({
 				/>
 
 				<span className="w-6 text-end">{orderindex}</span>
-				<div className="w-140 flex gap-3  ">
+				<div className=" w-180 flex gap-3">
 					<p className="text-dark font-semibold">{workitemname}</p>
 					<span className="text-apple-gray">#{workitemCode}</span>
-					<p className="flex gap-2">
+					<p className="flex gap-2 px-1">
 								<span className="font-bold">
-									{/* {supervisor.firstname + " " + supervisor.lastname} */}
 									{firstname + " " + lastname}
 								</span>
-								{/* {supervisor.employeeid} */}
 								{employeeid}
 					</p>
-					<p className="flex gap-2">
+					<p className="flex gap-2 px-1">
 						
 								{amountOfWorkDoneWI}/{workItem.mdTasks.length}
 					</p>
-					<p className="flex gap-2">
+					<p className="flex gap-2 px-1">
 							{percent}%
 					</p>
 					<span
-						className={` px-3  ${
+						className={` px-7  ${
 							percent == 100
 							? "bg-[#CCE0F1] text-[#3498DB]"
 							: (percent == 0

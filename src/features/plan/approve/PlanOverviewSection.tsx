@@ -9,17 +9,19 @@ export default function PlanOverviewSection({
   plOverView,
   numberOfWorkItems,
   numberOfTasks,
-  numberOfTasksDone
+  numberOfTasksDone,
+  numberOfWIDone
 }: {
   plOverView: IPlanOverviewProps;
   numberOfWorkItems: number;
   numberOfTasks: number;
   numberOfTasksDone: number;
+  numberOfWIDone: number;
 }) {
   useEffect(() => {
 	// alert(numberOfTasksDone.valueOf)
     var wkchart = {
-      series: [90, Math.floor((100/numberOfTasks)*numberOfTasksDone)],
+      series: [Math.floor((100/numberOfWorkItems)*numberOfWIDone), Math.floor((100/numberOfTasks)*numberOfTasksDone)],
       chart: {
         height: 280,
         type: "radialBar",
@@ -139,14 +141,14 @@ export default function PlanOverviewSection({
           </div>
           <div className=" grid grid-cols-3 flex-none gap-1">
 			  <div className=" col-span-2 my-auto font-semibold">Hạng mục</div>
-			  <div className=" row-span-2 flex justify-center items-center text-3xl font-extrabold text-[#1ABC9C]">27%</div>
+			  <div className=" row-span-2 flex justify-center items-center text-3xl font-extrabold text-[#1ABC9C]">{numberOfWIDone/numberOfWorkItems}%</div>
 			  <div className=" col-span-2 my-auto  text-text-color">
-				Hoàn thành: <span>12/40</span>
+				Hoàn thành: <span>{numberOfWIDone}/{numberOfWorkItems}</span>
 			  </div>
 			  <div className=" col-span-2 my-auto font-semibold">Công việc</div>
-			  <div className=" row-span-2 flex justify-center items-center text-3xl font-extrabold text-[#3498DB]">40%</div>
+			  <div className=" row-span-2 flex justify-center items-center text-3xl font-extrabold text-[#3498DB]">{numberOfTasksDone/numberOfTasks}%</div>
 			  <div className=" col-span-2 text-center my-auto text-text-color">
-				Hoàn thành: <span>20/60</span>
+				Hoàn thành: <span>{numberOfTasksDone}/{numberOfTasks}</span>
 			  </div>
 			</div>
         </div>

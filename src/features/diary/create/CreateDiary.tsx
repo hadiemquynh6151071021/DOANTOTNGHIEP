@@ -61,6 +61,8 @@ export default function CreateDiary() {
   var listSaveDiaryLabor: ILaborCreate[] = [];
   var listSaveDiaryProduct: IProductCreate[] = [];
 
+  const employeeId = parseInt(localStorage.getItem("employeeId"));
+
   const handleCSChange = (constructionSiteId: string) => {
     setSelectedCSId(constructionSiteId);
   };
@@ -95,7 +97,7 @@ export default function CreateDiary() {
     } else {
       setAlert({
         severity: "warning",
-        message: "Giờ kết thúc phải trước giờ bắt đầu",
+        message: "Giờ kết thúc phải sau giờ bắt đầu",
       });
     }
   }
@@ -253,7 +255,7 @@ export default function CreateDiary() {
       endtime: `${endTime.hour()}:${endTime.minute()}:${endTime.second()}`,
       temperature: temperature,
       cmsPlanTask: parseInt(selectedWT),
-      creator: 1,
+      creator: employeeId,
       quantityUnit: planTask?.mdTask.mdQuantityUnit.quantityunitid as number,
       mdWeather: parseInt(selectedWeather),
 

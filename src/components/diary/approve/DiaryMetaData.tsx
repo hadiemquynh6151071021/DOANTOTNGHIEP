@@ -31,6 +31,7 @@ export default function PlanInfo({
   const router = useRouter();
   const isDisplayApprover = stateID=== 3;
   const isDisplayConfirmer = stateID===2;
+  const employeeId = parseInt(localStorage.getItem("employeeId"));
   const actionConfirmer = lsHistory.filter(
     (item) => item.cmsDiaryAction.diaryactionid === 2
   )[0];
@@ -38,7 +39,6 @@ export default function PlanInfo({
     (item) => item.cmsDiaryAction.diaryactionid === 3
   )[0];
   const handleSubmitConfirm = () => {
-    const employeeId = parseInt(localStorage.getItem("employeeId"));
     var temp: ISaveHistory = {
       id: diaryId,
       actorid: employeeId,
@@ -56,7 +56,6 @@ export default function PlanInfo({
   };
 
   function rejectConfirm() {
-    const employeeId = parseInt(localStorage.getItem("employeeId"));
     var temp: ISaveHistory = {
       id: diaryId,
       actorid: employeeId,

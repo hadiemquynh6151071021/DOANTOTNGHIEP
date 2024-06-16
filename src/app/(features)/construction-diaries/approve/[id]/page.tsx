@@ -22,7 +22,7 @@ export default function Page({
                     href: "/construction-diaries"
                 },
                 {
-                    text: "Thông quá",
+                    text: "Chờ duyệt",
                 }
             ]}
         >

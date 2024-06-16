@@ -48,9 +48,7 @@ export default function Products({
           onChange={handleChangeConsumption}
         />
       </div>
-      <span className=" w-2 mr-2 cursor-pointer" onClick={() => handleRemoveProduct(product.mdProduct.productid)}>
-        <Icon size="lg" className="text-text-color" name="xmark" />
-      </span>
+      
     </div>
   );
 }

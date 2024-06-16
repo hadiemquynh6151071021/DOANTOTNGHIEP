@@ -151,8 +151,7 @@ export default function CreatePlan() {
     const startdate = planEstimate.startDate.format("DD-MM-YYYY").toString();
     const enddate = planEstimate.endDate.format("DD-MM-YYYY").toString();
     const employeeId = parseInt(localStorage.getItem("employeeId"));
-
-    alert("employ" + employeeId);
+    
     const formBodyData: ICreatePlan = {
       planname: planEstimate.planName,
       startdate,

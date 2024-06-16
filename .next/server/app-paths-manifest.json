@@ -1,3 +1,5 @@
 {
-  "/(features)/plans/create/page": "app/(features)/plans/create/page.js"
+  "/page": "app/page.js",
+  "/(features)/construction-diaries/page": "app/(features)/construction-diaries/page.js",
+  "/(features)/construction-diaries/[id]/page": "app/(features)/construction-diaries/[id]/page.js"
 }

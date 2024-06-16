@@ -8,7 +8,7 @@ axios.defaults.headers.put["Content-Type"] = "application/json";
 axios.defaults.timeout = 10000;
 
 axios.interceptors.request.use((config) => {
-  const token = localStorage.getItem("accessToken");
+  const token = localStorage.getItem("token");
 
   if (token !== undefined && token)
     config.headers.Authorization = "Bearer " + token;

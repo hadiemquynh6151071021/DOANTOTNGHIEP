@@ -13,6 +13,7 @@ import ListLaborsDiary from "../ListLaborsDiary";
 import { IDiaryProductDetail } from "@/models/DiaryProduct";
 import IFile from "@/models/File";
 import { DefaultizedPieValueType, PieChart, pieArcLabelClasses } from "@mui/x-charts";
+import IProgress from "@/models/Progress";
 
 export interface IDRDetailProps {}
 export default function DiaryInfo({
@@ -20,11 +21,13 @@ export default function DiaryInfo({
   lsLabor,
   lsProduct,
   lsFile,
+  progressInfo
 }: {
   diary: IDiary;
   lsLabor: IDiaryEmployeeDetail[];
   lsProduct: IDiaryProductDetail[];
   lsFile: IFile[];
+  progressInfo: IProgress;
 }) {
   const [weather, setWeather] = useState<string>();
   function imageWeather() {

@@ -11,6 +11,8 @@ import { IEmployee } from "@/models/Employee";
 import ICostEstimateTaskProduct from "@/models/CostEstimateTaskProduct";
 import { isAxiosError } from "axios";
 import { IAddress } from "@/models/ConstructionSite";
+import { CenterPoint } from "@/models/CenterPoint";
+import employeeAPI from "@/apis/employee";
 
 export interface IPlanWorkItemSectionProps {
 	costEstimateId: number;
@@ -37,8 +39,11 @@ export default function PlanWorkItemSection({
 }: IPlanWorkItemSectionProps) {
 	const setLoading = useLoadingAnimation();
 	const setAlert = useAlert();
+	const listCostestimateTaskId = new Set<number>();
+	const startIndex: number = 0;
 
 	const [workItems, setWorkItems] = useState<ITempPlanWorkItem[]>([])
+	const [kmeansInput, setKmeansInput] = useState<CenterPoint[]>([]);
 
 	const selectedWorkItems = workItems.filter(wi => wi.isSelected);
 	const totalOfTasks = workItems.reduce((res, currentWI) => {
@@ -67,11 +72,15 @@ export default function PlanWorkItemSection({
 					const task = tasks[j];
 					const productsRes = await costEstimateAPI.getListCostEstimateTaskProducts(task.costestimatetaskid);
 					workItemProducts.push(productsRes);
+					listCostestimateTaskId.add(task.costestimatetaskid.valueOf());
 				}
 
 				products.push(workItemProducts);
 			}
 
+			// const kmeansInput = await costEstimateAPI.getKmeansInput(Array.from(listCostestimateTaskId));
+			// setKmeansInput(kmeansInput);
+			
 			const newWorkItems: ITempPlanWorkItem[] = workItemRes.map((wi, workItemIndex) => {
 				const tasks: ITempPlanTask[] = wi.taskDTOs.map((t, taskIndex) => {
 					return ({
@@ -145,6 +154,7 @@ export default function PlanWorkItemSection({
 			{workItems.map((wi, idx) => (
 				<PlanWorkItem
 					key={wi.workItemId}
+					kmeansInput={kmeansInput}
 					orderIndex={idx + 1}
 					workItem={wi}
 					addressCS={addressCS}
@@ -169,14 +179,6 @@ export default function PlanWorkItemSection({
 					<Icon name="floppy-disk" size="xl" />
 					Lưu
 				</Button>
-				{/* <Button
-                    color="info"
-                    className="min-w-[100px] bg-primary flex justify-center items-center gap-5"
-                    variant="contained"
-                >
-                    <Icon name="paper-plane" size="xl" />
-                    Gửi
-                </Button> */}
 			</footer>
 		</section>
 	)

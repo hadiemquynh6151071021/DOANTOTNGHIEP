@@ -46,13 +46,13 @@ export default function Page() {
 					</Tabs>
 	
 					<CustomTabPanel value={tabValue} index={0}>
-						<PlanTable planType={PlanListType.Approved} enabled={true} plansFromCE={false} constructionsiteid={null}/>
+						<PlanTable planType={PlanListType.Approved} enabled={true} plansFromCE={false} constructionsiteid={null} readonly={true}/>
 					</CustomTabPanel>
 					<CustomTabPanel value={tabValue} index={1}>
-						<PlanTable planType={PlanListType.Init} enabled={true} plansFromCE={false} constructionsiteid={null}/>
+						<PlanTable planType={PlanListType.Init} enabled={true} plansFromCE={false} constructionsiteid={null} readonly={false}/>
 					</CustomTabPanel>
 					<CustomTabPanel value={tabValue} index={2}>
-						<PlanTable planType={PlanListType.Rejected} enabled={true} plansFromCE={false} constructionsiteid={null}/>
+						<PlanTable planType={PlanListType.Rejected} enabled={true} plansFromCE={false} constructionsiteid={null} readonly={true}/>
 					</CustomTabPanel>
 				</MainContainer>
 			</PageContainer>

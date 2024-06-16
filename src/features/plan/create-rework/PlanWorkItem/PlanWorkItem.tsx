@@ -10,8 +10,11 @@ import Task, { ITempPlanTask } from "./PlanTask";
 import useModal from "@/hooks/useModal";
 import employeeAPI from "@/apis/employee";
 import { IAddress } from "@/models/ConstructionSite";
+import { CenterPoint } from "@/models/CenterPoint";
+import request from "@/apis/request";
 
 export interface IPlanWorkItemProps {
+  kmeansInput: CenterPoint[]
   orderIndex: number;
   workItem: ITempPlanWorkItem;
   addressCS: IAddress;
@@ -19,6 +22,7 @@ export interface IPlanWorkItemProps {
 }
 
 export default function PlanWorkItem({
+  kmeansInput,
   workItem,
   addressCS,
   onWorkItemChange,
@@ -34,6 +38,19 @@ export default function PlanWorkItem({
   const { setModal, setIsOpenModal } = useModal();
   const [isShow, setIsShow] = useState(true);
   const [employeePosition, setEmployeePosition] = useState(3);
+
+//   let centerPoints: CenterPoint[] = [
+//     {
+//         skillIds: [1, 2],
+//         skillRankIds: [5, 5],
+//         educationLevelId: 3
+//     },
+//     {
+//         skillIds: [2],
+//         skillRankIds: [4],
+//         educationLevelId: 3
+//     }
+// ];
 
   function handleChangeIsSelected(e: ChangeEvent<HTMLInputElement>) {
     onWorkItemChange({
@@ -54,6 +71,23 @@ export default function PlanWorkItem({
       });
     }
   }
+
+  // useEffect(() => {
+  //   fetchData();
+  // },[]);
+
+
+  // async function fetchData() {
+  //   employeeAPI.getEmployeesByCenterPoint(centerPoints, addressCS.addressid)
+  //     .then(response => {
+  //       // Xử lý kết quả trả về ở đây
+  //       console.log(response);
+  //     })
+  //     .catch(error => {
+  //       // Xử lý lỗi ở đây
+  //       console.error(error);
+  //     });
+  // }
 
 
   return (
@@ -127,3 +161,6 @@ export default function PlanWorkItem({
     </section>
   );
 }
+
+
+

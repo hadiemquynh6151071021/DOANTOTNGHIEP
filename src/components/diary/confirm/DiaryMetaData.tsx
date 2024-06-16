@@ -40,7 +40,7 @@ export default function PlanInfo({
   const handleSubmitConfirm = () => {
     var temp: ISaveHistory = {
       id: diaryId,
-      actorid: 1,
+      actorid: parseInt(localStorage.getItem("employeeId")),
       actionid: 2,
       description: "",
     };
@@ -57,7 +57,7 @@ export default function PlanInfo({
   function rejectConfirm() {
     var temp: ISaveHistory = {
       id: diaryId,
-      actorid: 1,
+      actorid: parseInt(localStorage.getItem("employeeId")),
       actionid: 4,
       description: "",
     };

@@ -57,9 +57,7 @@ export default function Labors({
           ))}
         </Select>
       </FormControl>
-      <span className=" w-2 mr-2 cursor-pointer" onClick={() => handleRemoveLabor(labor.userid)}>
-        <Icon size="lg" className="text-text-color" name="xmark" />
-      </span>
+      
     </div>
   );
 }

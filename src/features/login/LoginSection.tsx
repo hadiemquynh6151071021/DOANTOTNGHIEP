@@ -86,6 +86,9 @@ export default function LoginSection() {
     setLoading(true);
     try {
       
+      localStorage.removeItem('token')
+      localStorage.removeItem('fullName');
+      localStorage.removeItem('employeeId');
       const response = await accountAPI.login(inputs["username"].value, inputs["password"].value);
       const token = response.token;
       const listRole = jwt.decode(token);

@@ -20,13 +20,15 @@ interface IPlanTableProps {
 	enabled: boolean;
 	plansFromCE: boolean;
 	constructionsiteid: number;
+	readonly: boolean;
 }
 
 export default function PlanTable({
 	planType,
 	enabled,
 	plansFromCE,
-	constructionsiteid
+	constructionsiteid,
+	readonly
 }: IPlanTableProps) {
 
 	// set up page
@@ -37,7 +39,6 @@ export default function PlanTable({
 	const [rows, setRows] = useState<IPlanData[]>([]);
 	const [filteredRows, setFilteredRows] = useState<IPlanData[]>([]);
 	const [selectedCS, setSelectedCS] = useState("");
-	const [token, setToken] = useState(null);
 	const [url, setUrl] = useState<string>("");
 
 	// <EnhancedTableHead />
@@ -79,11 +80,17 @@ export default function PlanTable({
 	}, []);
 
 	function setURL() {
-		if(checkPermission(token)===2){
+		if(readonly==true){
 			setUrl("/plans/")
 		}
-			else {
-			setUrl("/plans/approve/")}
+		else{
+			const token = localStorage.getItem('token');
+			if(checkPermission(token) === 1 || checkPermission(token) === 3){
+				setUrl("/plans/")
+			}
+				else {
+				setUrl("/plans/approve/")}
+		}
 	}
 
 	async function fetchRecentPlan() {
@@ -91,7 +98,7 @@ export default function PlanTable({
 		try {
 			let plans;
 			if(plansFromCE.valueOf()===false){
-				plans = await planAPI.getList(planType.valueOf()) || [];
+				plans = await planAPI.getListPlan(planType.valueOf()) || [];
 			}
 			else{
 				

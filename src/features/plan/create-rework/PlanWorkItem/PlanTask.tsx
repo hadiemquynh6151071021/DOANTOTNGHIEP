@@ -136,6 +136,10 @@ export default function Task({
 								costestimatetaskid={costestimatetaskid}
 								labors={labors}
 								products={products}
+								taskName={task.taskName}
+								taskCode={task.taskCode}
+								amountOfWork={task.amountOfWork}
+								quantityUnitName={task.quantityUnitName}
 								onChangeLabors={(newLabors: IEmployee[]) => {
 									onChangeTask({
 										...task,
