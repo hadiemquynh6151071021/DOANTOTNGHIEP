@@ -13,7 +13,7 @@ export function checkPermission(token: string | null): Number {
         if(subArray[0] == IPermission.One){
             return 1
         }
-        else if(role[0] == IPermission.Two){
+        else if(subArray[0] == IPermission.Two){
             return 2
         }
         else {

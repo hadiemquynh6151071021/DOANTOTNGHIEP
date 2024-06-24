@@ -15,10 +15,26 @@ export default function Page({
 }) {
 
     const [tabValue, setTabValue] = useState<number>(0);
+	const [token, setToken] = useState(null);
+	const [readonly, setReadonly] = useState<boolean>();
 
 	function handleChangeTab(event: React.SyntheticEvent, newValue: number) {
 		setTabValue(newValue);
 	}
+
+	useEffect(() => { 
+        const storedToken = localStorage.getItem('token');
+        setToken(storedToken);
+		setPermission(storedToken)
+    }, []);
+
+	function setPermission(token) {
+		  if (checkPermission(token) === 1 || checkPermission(token) === 3) {
+			setReadonly(true);
+		  } else {
+			setReadonly(false);
+		  }
+	  }
 
     
     return (
@@ -44,13 +60,13 @@ export default function Page({
 				</Tabs>
 
 				<CustomTabPanel value={tabValue} index={0}>
-					<PlanTable planType={PlanListType.Approved} enabled={false} plansFromCE={true} constructionsiteid={id.valueOf()} readonly={false}/>
+					<PlanTable planType={PlanListType.Approved} enabled={false} plansFromCE={true} constructionsiteid={id.valueOf()} readonly={true}/>
 				</CustomTabPanel>
 				<CustomTabPanel value={tabValue} index={1}>
-					<PlanTable planType={PlanListType.Init} enabled={false} plansFromCE={true} constructionsiteid={id.valueOf()} readonly={false}/>
+					<PlanTable planType={PlanListType.Init} enabled={false} plansFromCE={true} constructionsiteid={id.valueOf()} readonly={readonly}/>
 				</CustomTabPanel>
 				<CustomTabPanel value={tabValue} index={2}>
-					<PlanTable planType={PlanListType.Rejected} enabled={false} plansFromCE={true} constructionsiteid={id.valueOf()} readonly={false}/>
+					<PlanTable planType={PlanListType.Rejected} enabled={false} plansFromCE={true} constructionsiteid={id.valueOf()} readonly={true}/>
 				</CustomTabPanel>
 			</MainContainer>
         

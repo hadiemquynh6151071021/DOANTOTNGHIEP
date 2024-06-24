@@ -81,13 +81,25 @@ export default function CreatePlan() {
           );
         }
 
+        
+
         const filteredTask = wi.tasks.filter((t) => t.isSelected);
         const tasks = filteredTask.map((t) => {
+          if(t.labors.length == 0) {
+            const message = `Cần chọn nhân công cho công việc ${t.taskName}`;
+            console.log(message);
+            throw new Error(message);
+          }
+          
           if (!t.startDate) {
             const message = `Cần nhập Ngày bắt đầu của Hạng mục ${wi.orderIndex} Task ${t.orderIndex}`;
             console.log(message);
             throw new Error(message);
           }
+
+          //=============================
+
+         
 
           if (!t.endDate) {
             const message = `Cần nhập Ngày kết thúc của Hạng mục ${wi.orderIndex} Task ${t.orderIndex}`;

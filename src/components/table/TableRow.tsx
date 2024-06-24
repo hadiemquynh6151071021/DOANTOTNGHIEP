@@ -7,12 +7,14 @@ interface ITableRowProps {
 	cells: {
 		value: string;
 		align?: "left" | "right"
-	}[]
+	}[],
+	onClick?: Function
 }
 
 export default function TableRow({
 	href,
-	cells
+	cells,
+	onClick
 }: ITableRowProps) {
 	const router = useRouter();
 

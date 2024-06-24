@@ -9,7 +9,7 @@ import IDiary from "@/models/Diary";
 import { useRouter } from "next/navigation";
 import { checkPermission } from "@/models/Token";
 
-export default function   ListDiaryWaitingConfirm() {
+export default function ListDiaryWaitingConfirm() {
   const [filterValue, setFilterValue] = useState(0);
   const [listDiariesConfirm, setListDiariesReview] = React.useState<IDiary[]>(
     []

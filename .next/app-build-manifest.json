@@ -11,11 +11,6 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/(features)/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(features)/layout.js"
-    ],
     "/(features)/home/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -26,20 +21,25 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(features)/home/layout.js"
     ],
-    "/(features)/construction-diaries/page": [
+    "/(features)/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(features)/construction-diaries/page.js"
+      "static/chunks/app/(features)/layout.js"
     ],
-    "/(features)/construction-diaries/layout": [
+    "/(features)/plans/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(features)/construction-diaries/layout.js"
+      "static/chunks/app/(features)/plans/page.js"
     ],
-    "/(features)/construction-diaries/[id]/page": [
+    "/(features)/plans/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(features)/construction-diaries/[id]/page.js"
+      "static/chunks/app/(features)/plans/layout.js"
+    ],
+    "/(features)/plans/create/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(features)/plans/create/page.js"
     ]
   }
 }
